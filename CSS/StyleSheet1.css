@@ -1,3 +1,420 @@
-﻿body
-{
-}ss
+﻿html {
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+/*  --------------- Responsive Images -----------------  */
+
+img {
+    max-width: 100%;
+}
+
+/*  --------------- Utility Classes -----------------  */
+
+.container {
+    max-width: 960px;
+    width: 80vw;
+    margin: 40px auto;
+}
+
+.img-right {
+    float: right;
+    margin: 10px 0 10px 20px;
+    border: 1px solid #c0c0c0;
+    padding: 5px;
+    border-radius: 50px;
+}
+
+.img-left {
+    float: left;
+    margin: 10px 20px 10px 0;
+    border: 1px solid #c0c0c0;
+    padding: 5px;
+    border-radius: 50px;
+}
+
+.img-center {
+    display: block;
+    margin: 20px auto;
+    border: 1px solid #c0c0c0;
+    padding: 5px;
+    border-radius: 50px;
+}
+
+/*  --------------- Global Styles -----------------  */
+
+body {
+    font-family: "Gabarito", sans-serif;
+    margin: 0;
+}
+
+
+
+header.primary {
+    background-color: #3b638b;
+    background-image: url("https://i.imgur.com/865yy0e.png");
+    background-size: cover;
+    background-position: center;
+    color: #294868;
+    text-align: center;
+    text-shadow: 2px 2px #c8a200;
+    /*long form*/
+    padding-top: 40px;
+    padding-right: 40px;
+    padding-bottom: 40px;
+    padding-left: 40px;
+    /*Single value short hand*/
+    padding: 40px;
+    /* T,R,B,L */
+    padding: 20px 40px 20px 40px;
+    /* Two Value Top/Bottom / L/R */
+    padding: 20px 40px;
+}
+
+    header.primary h1 {
+        font-size: 5rem;
+        margin: 20px 0 0;
+    }
+
+        header.primary h1 a {
+            color: #EFBF04;
+            text-decoration: none;
+        }
+
+    header.primary h2 {
+        margin: 0;
+        font-size: 2.4rem;
+    }
+
+        header.primary h2 a {
+            color: #294868;
+            text-decoration: none
+        }
+
+/*Media queries for responsiveness*/
+/*desktop*/
+@media(min-width:1200px) {
+    header.primary {
+        padding: 60px 40px;
+    }
+
+        header.primary h1 {
+            font-size: 5rem;
+        }
+
+        header.primary h2 {
+            font-size: 2.4rem;
+        }
+}
+
+.signup,
+.login {
+    width: 50%;
+    background: #fff;
+    float: left;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+
+
+
+
+/*Tablets */
+@media (max-width: 1024px) {
+    header.primary h1 {
+        font-size: 2rem;
+    }
+
+    .container {
+        width: 90vw;
+        margin: 30px auto;
+    }
+    /*adjust padding for header*/
+    header.primary {
+        padding: 40px;
+    }
+
+        header.primary h2 {
+            font-size: 1.4rem;
+        }
+}
+
+/*Phones(480px-767px)*/
+@media(max-width: 767px) {
+    header.primary h1 {
+        font-size: 1.6rem;
+    }
+
+    header.primary h2 {
+        font-size: 1.2rem;
+    }
+
+    .container {
+        width: 95vw;
+        margin: 20px auto;
+    }
+    /*Adjust padding for header*/
+    header.primary {
+        padding: 20px;
+        background-size: cover;
+        background-position: center center; /* Keeps the image centered */
+        background-repeat: no-repeat; /* Prevents the image from repeating */
+        height: auto; /* Adjust the height so the content and image fit nicely */
+    }
+}
+/* Extra small phones (max-width: 480px) */
+@media (max-width: 480px) {
+    header.primary {
+        padding: 10px;
+        background-size: cover; /* Keep the image visible without cutting */
+        background-position: center center; /* Center the image */
+        background-repeat: no-repeat; /* No image repetition */
+        height: auto; /* Adjust height dynamically */
+    }
+
+        header.primary h1 {
+            font-size: 1.2rem; /* Smaller font for H1 */
+        }
+
+        header.primary h2 {
+            font-size: 1rem; /* Smaller font for H2 */
+        }
+
+    .container {
+        width: 90vw; /* Slightly narrower container */
+        margin: 10px auto;
+    }
+}
+
+.container {
+    height: 600px;
+    width: 500px;
+    background-color: transparent;
+    box-shadow: 8px 8px 20px rgb(128, 128, 128);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn {
+    height: 60px;
+    width: 300px;
+    margin: 20px auto;
+    box-shadow: 10px 10px 30px rgb(254, 215, 188);
+    border-radius: 50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.login,
+.signup {
+    font-size: 22px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    position: relative;
+    cursor: pointer;
+}
+
+.slider {
+    height: 60px;
+    width: 150px;
+    border-radius: 50px;
+    background-image: linear-gradient( to right, rgb(255, 195, 110), rgb(255, 146, 91) );
+    position: absolute;
+    top: 20px;
+    left: 100px;
+    transition: all 0.5s ease-in-out;
+}
+
+.moveslider {
+    left: 250px;
+}
+
+.form-section {
+    height: 500px;
+    width: 1000px;
+    padding: 20px 0;
+    display: flex;
+    position: relative;
+    transition: all 0.5s ease-in-out;
+    left: 0px;
+}
+
+.form-section-move {
+    left: -500px;
+}
+
+.login-box,
+.signup-box {
+    height: 100%;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0px 40px;
+}
+
+.login-box {
+    gap: 50px;
+}
+
+.signup-box {
+    gap: 30px;
+}
+
+.ele {
+    height: 60px;
+    width: 400px;
+    outline: none;
+    border: none;
+    color: rgb(77, 77, 77);
+    background-color: rgb(240, 240, 240);
+    border-radius: 50px;
+    padding-left: 30px;
+    font-size: 18px;
+}
+
+.clkbtn {
+    height: 60px;
+    width: 150px;
+    border-radius: 50px;
+    background-image: linear-gradient( to right, rgb(255, 195, 110), rgb(255, 146, 91) );
+    font-size: 22px;
+    border: none;
+    cursor: pointer;
+}
+
+/* For Responsiveness of the page */
+
+@media screen and (max-width: 850px) {
+    .container {
+        height: 900px;
+        width: 400px;
+    }
+
+    .title {
+        font-size: 15px;
+    }
+
+    .btn {
+        height: 50px;
+        width: 200px;
+        margin: 20px auto;
+    }
+
+    .login,
+    .signup {
+        font-size: 19px;
+    }
+
+    .slider {
+        height: 50px;
+        width: 100px;
+        left: 50px;
+    }
+
+    .moveslider {
+        left: 150px;
+    }
+
+    .form-section {
+        height: 500px;
+        width: 600px;
+    }
+
+    .form-section-move {
+        left: -300px;
+    }
+
+    .login-box,
+    .signup-box {
+        height: 100%;
+        width: 300px;
+    }
+
+    .ele {
+        height: 50px;
+        width: 250px;
+        font-size: 15px;
+    }
+
+    .clkbtn {
+        height: 50px;
+        width: 130px;
+        font-size: 19px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .container {
+        height: 900px;
+        width: 450px;
+    }
+
+    .heading {
+        font-size: 30px;
+    }
+
+    .title {
+        font-size: 10px;
+    }
+
+    .btn {
+        height: 50px;
+        width: 200px;
+        margin: 20px auto;
+    }
+
+    .login,
+    .signup {
+        font-size: 19px;
+    }
+
+    .slider {
+        height: 50px;
+        width: 100px;
+        left: 27px;
+    }
+
+    .moveslider {
+        left: 127px;
+    }
+
+    .form-section {
+        height: 500px;
+        width: 500px;
+    }
+
+    .form-section-move {
+        left: -250px;
+    }
+
+    .login-box,
+    .signup-box {
+        height: 100%;
+        width: 250px;
+    }
+
+    .ele {
+        height: 50px;
+        width: 220px;
+        font-size: 15px;
+    }
+
+    .clkbtn {
+        height: 50px;
+        width: 130px;
+        font-size: 19px;
+    }
+}
