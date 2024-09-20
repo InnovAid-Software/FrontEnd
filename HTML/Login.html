@@ -23,45 +23,44 @@
             </div>
         </header>
 
-        <section id="content"
-                 class="container">
+        <div class="container">
+            <div class="slider"></div>
+            <div class="btn">
+                <button class="login">Login</button>
+                <button class="signup">Signup</button>
+            </div>
 
-            <div class="wrapper">
-                <div class="container">
-                    <div class="signup">Sign Up</div>
-                    <div class="login">Log In </div>
+            <div class="form-section">
+                <div class="login-box">
+                    <input type="email" class="ele" placeholder="youremail@email.com">
+                    <input type="password" class="ele" placeholder="password">
+                    <label for="login-user-types">Choose User-Type:</label>
+                    <select name="user-types" id="login-user-types" class="ele">
+                        <option value="Student">Student</option>
+                        <option value="Admin">Admin</option>
+                        <option value="Root">Root</option>
+                    </select>
+                    <button class="clkbtn">Login</button>
+                </div>
 
-                    <div class="signup-form">
-                        <input type="text" placeholder="Proposed Username" class="input"><br />
-                        <input type="text" placeholder="Proposed Password" class="input"><br />
-                        <input type="password" placeholder="Email Address" class="input"><br />
-                        <label for="user-types">Choose User-Type:</label>
-                        <select name="user-types" id="user-types">
-                            <option value="Student">Student</option>
-                            <option value="Admin">Admin</option>
-                            <option value="Root">Root</option>
-                        </select>
-                        <button class="clkbtn">Login</button>
-                    </div>
+                <div class="signup-box">
 
-                    <div class="signup-box">
+                    <input type="email" class="ele" placeholder="youremail@email.com">
+                    <input type="password" class="ele" placeholder="password">
 
-                        <input type="email" class="ele" placeholder="youremail@email.com">
-                        <input type="password" class="ele" placeholder="password">
-
-                        <label for="signup-user-types">Choose User-Type:</label>
-                        <select name="user-types" id="signup-user-types" class="ele">
-                            <option value="Student">Student</option>
-                            <option value="Admin">Admin</option>
-                            <option value="Root">Root</option>
-                        </select>
-                        <button class="clkbtn">Signup</button>
-                    </div>
+                    <label for="signup-user-types">Choose User-Type:</label>
+                    <select name="user-types" id="signup-user-types" class="ele">
+                        <option value="Student">Student</option>
+                        <option value="Admin">Admin</option>
+                        <option value="Root">Root</option>
+                    </select>
+                    <button class="clkbtn">Signup</button>
                 </div>
             </div>
+        </div>
         </section>
     </main>
-    <script src="index.js"></script> <!-- Ensure this path matches your project structure -->
+    <script src="JavaScript/Login.js"></script> <!-- Ensure this path matches your project structure -->
 
 
 </body>
