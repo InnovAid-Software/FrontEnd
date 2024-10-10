@@ -15,18 +15,20 @@ login.addEventListener("click", () => {
 
  
 
-//const url = 'https://innovaid.dev/api/login';
+const url = 'https://innovaid.dev/api/login';
 
 
 
-//document.getElementById('signupForm').addEventListener('submit', async function(e)
-//{
-//    e.preventDefault();
+document.getElementById('signupForm').addEventListener('submit', async function(e)
+{
+    e.preventDefault(); //prevent form from submitting the traditional way
 
-//    const email = document.getElementById('signupForm')
 
+    //Get values from the form
+    const email = document.getElementById('').value;
+    const password=document.getElementById('')
     
-//}
+}
 
 //document.getElementById('loginForm').addEventListener('submit', async function (e)
 //{
@@ -42,4 +44,4 @@ login.addEventListener("click", () => {
 
 
 
-}
+//}
