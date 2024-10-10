@@ -15,31 +15,30 @@ login.addEventListener("click", () => {
 
  
 
-const url = 'https://innovaid.dev/api/login';
+//const url = 'https://innovaid.dev/api/login';
 
 
 
-document.getElementById('signupForm').addEventListener('submit', async function(e)
-{
-    e.preventDefault();
+//document.getElementById('signupForm').addEventListener('submit', async function(e)
+//{
+//    e.preventDefault();
 
-    const email = document.getElementById('signupForm').addEventListener('submit')
-    const password =
-    
-}
-
-document.getElementById('loginForm').addEventListener('submit', async function (e)
-{
-    //When the user clicks the submit button, capture
-    //the form data and send it as a Post request to backend
-    //API using fectch. send user's details as JSON to the server
-    e.preventDefault(); 
-
-    //get values from the form
-
+//    const email = document.getElementById('signupForm')
 
     
+//}
 
+//document.getElementById('loginForm').addEventListener('submit', async function (e)
+//{
+//    //When the user clicks the submit button, capture
+//    //the form data and send it as a Post request to backend
+//    //API using fectch. send user's details as JSON to the server
+//    e.preventDefault(); 
+
+//    //get values from the form
+
+
+   
 
 
 
