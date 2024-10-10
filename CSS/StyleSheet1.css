@@ -125,7 +125,23 @@ header.primary {
 }
 
 
+footer#colophon {
+    background-color: #294868;
+}
 
+#colophon h6 {
+    padding: 20px;
+    margin: 0;
+    color: #fff;
+    text-align: center;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+    #colophon h6 a:link,
+    #colophon h6 a:visited {
+        color: #fff;
+    } 
 
 
 /*Tablets */

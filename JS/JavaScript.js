@@ -12,3 +12,8 @@ login.addEventListener("click", () => {
     slider.classList.remove("moveslider");
     formSection.classList.remove("form-section-move");
 });
+
+
+const url = 'https://innovaid.dev/api/login';
+
+
