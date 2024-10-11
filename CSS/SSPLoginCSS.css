@@ -96,6 +96,24 @@ header.primary {
             text-decoration: none
         }
 
+
+#message {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid;
+    display: none; /* Initially hidden */
+}
+
+.success {
+    border-color: green;
+    color: green;
+}
+
+.error {
+    border-color: red;
+    color: red;
+}
+
 /*Media queries for responsiveness*/
 /*desktop*/
 @media(min-width:1200px) {
