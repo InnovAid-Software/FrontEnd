@@ -54,7 +54,7 @@ body {
 }
 
 
-
+/*  --------------- Header Section -----------------  */
 header.primary {
     background-color: #3b638b;
     background-image: url("https://i.imgur.com/865yy0e.png");
@@ -77,7 +77,7 @@ header.primary {
 }
 
     header.primary h1 {
-        font-size: 5rem;
+        font-size: 3rem;
         margin: 20px 0 0;
     }
 
@@ -164,6 +164,7 @@ footer#colophon {
 
 /*Tablets */
 @media (max-width: 1024px) {
+
     header.primary h1 {
         font-size: 2rem;
     }
@@ -174,7 +175,7 @@ footer#colophon {
     }
     /*adjust padding for header*/
     header.primary {
-        padding: 40px;
+        padding: 30px;
     }
 
         header.primary h2 {
