@@ -26,30 +26,6 @@ function displayMessage(msg, isSuccess = true) {
     message.style.display = 'block';
 }
 
-// Function to register the user
-//async function registerUser(email, password, usertype) {
-//    try {
-//        const response = await fetch('https://innovaid.dev/api/user/register', {
-//            method: 'POST',
-//            headers: {
-//                'Content-Type': 'application/json',
-//            },
-//            body: JSON.stringify({ email, password, usertype }),
-//        });
-
-//        const data = await response.json();
-//        if (response.ok) {
-//            displayMessage(data.message);  // Successful registration
-//            console.log('Verification will be sent to:', email);
-//        } else {
-//            displayMessage(data.message || 'Registration failed', false);
-//        }
-//    } catch (error) {
-//        console.error('Error:', error);
-//        displayMessage('An error occurred during registration.', false);
-//    }
-//}
-
 
 // Event listener for form submission (register)
 document.getElementById('signupForm').addEventListener('submit',function (e) {
