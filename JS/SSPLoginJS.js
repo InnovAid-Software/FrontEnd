@@ -51,13 +51,13 @@ document.getElementById('signupForm').addEventListener('submit',function (e) {
     axios.post('https://innovaid.dev/api/user/register', signUpData)
         .then(function (response) {
             // Handle successful signup
-            console.log('Login successful', response.data);
-            displayMessage('Login successful');
+            console.log('Sign Up successful', response.data);
+            displayMessage('Sign Up successful');
         })
         .catch(function (error) {
             //handle signup error
             console.error('Error logging in:', error.response ? error.response.data : error.message);
-            displayMessage('Login unsuccessful', false);
+            displayMessage('Sign Up unsuccessful', false);
         });
 });
 
