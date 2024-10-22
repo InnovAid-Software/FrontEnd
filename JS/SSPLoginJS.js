@@ -85,6 +85,7 @@ document.getElementById('loginForm').addEventListener('submit', async function (
             //Handle successful login
             console.log('Login successful', response.data);
             displayMessage('Login successful');
+             
         })
         .catch(function (error) {
 
