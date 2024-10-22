@@ -65,12 +65,12 @@ document.getElementById('signupForm').addEventListener('submit',function (e) {
 //When the user clicks the submit button, capture
 //the form data and send it as a Post request to backend
 // Event listener for form submission (login)
-document.getElementById('loginForm').addEventListener('submit', async function (e) {
+document.getElementById('loginForm').addEventListener('submit', function (e) {
     e.preventDefault(); // Prevent form from submitting the traditional way
 
     // Get values from the form
     const email = document.getElementById('loginEmail').value;
-    const password = document.getElementById('loginPassword').value;
+    const password = document.getElementById('LoginPassword').value;
 
     //Create a login payload
     const logInData = {
