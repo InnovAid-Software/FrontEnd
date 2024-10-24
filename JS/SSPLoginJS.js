@@ -84,6 +84,18 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
         .then(function (response) {
             //Handle successful login
             console.log('Login successful', response.data);
+
+            //// Store the token in localStorage
+            //const token = response.data.token;  // Assuming the token is in response.data.token?
+            //localStorage.setItem('token', token);  // Save token to localStorage
+
+            //// Check if the token is successfully stored
+            //if (localStorage.getItem('token')) {
+            //    console.log('Token stored successfully:', localStorage.getItem('token'));
+            //} else {
+            //    console.log('Token not stored');
+            //}
+
             displayMessage('Login successful');
              
         })
