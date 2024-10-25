@@ -9,38 +9,55 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
-    <nav class="sidebar">
-        <header>
-          <div class="image-text">
-            <span class="image">
+    <nav>
+        <div class="logo">
+            <div class="logo-image">
                 <img src="../Assests/logo.png" alt="logo">
-            </span>
-            <div class="text header-text">
-                <span class="name">InovAid Homepage</span>
             </div>
-          </div>
+            <span class="logo-name">InovAid</span>
+        </div>
 
-          <i class='bx bxs-chevrons-right toggle' ></i>
+        <div class="menu-items">
+            <ul class="nav-links">
+                <li><a href="#">
+                    <i class='bx bx-home'></i>
+                    <span class="link-name">Dashboard</span>
+                </a></li>
+                <li><a href="#">
+                    <i class='bx bx-file'></i>
+                    <span class="link-name">Student Info</span>
+                </a></li>
+                <li><a href="#">
+                    <i class='bx bx-cog' ></i>
+                    <span class="link-name">Account Settings</span>
+                </a></li>
+            </ul>
 
-        </header>
+            <ul class="logout-mod">
+                <li><a href="#">
+                    <i class='bx bx-log-out' ></i>
+                    <span class="link-name">Logout</span>
+                </a></li>
 
-        <div class="menu-bar">
-            <div class="menu">
-                <li class="nav-link">
-                        <i class='bx bx-home' ></i>
-                        <span class="text nav-text">Dashboard</span>
-                    
-                </li>
-                <ul class="menu-links">
-                    <li class="nav-link">
-                        <a href="#">
-                            <i class='bx bx-home' ></i>
-                            <span class="text nav-text">Dashboard</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+                <li class="mode">
+                    <a href="#">
+                        <i class='bx bx-moon' ></i>
+                    <span class="link-name">Dark Mode</span>
+                </a>
+
+                <div class="mode-toggle">
+                <span class="switch"></span>
+                </div>
+            </li>
+            </ul>
         </div>
     </nav>
+    <section class="dashboard">
+        <div class="top">
+            <i class='bx bxs-arrow-from-left sidebar-toggle' ></i>
+           
+        </div>
+    </section>
+    <script src="../JS/SSPLandingpage.js"></script>
 </body>
 </html>
