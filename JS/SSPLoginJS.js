@@ -53,7 +53,7 @@ document.getElementById('signupForm').addEventListener('submit',function (e) {
             // Handle successful signup
             console.log('Sign Up successful', response.data);
             displayMessage('Sign Up successful');
-
+            window.location.href = '../HTML/SSPVerifyAccountPage.html';
         })
         .catch(function (error) {
             //handle signup error
