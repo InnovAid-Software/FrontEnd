@@ -5,4 +5,6 @@ document.getElementById('BackHomeForm').addEventListener('submit', function (e) 
 
     //redirect to homepage
     window.location.href = '../HTML/SSPLoginPage.html';
+
+
 });

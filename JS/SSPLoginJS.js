@@ -89,6 +89,9 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
             // Store the token in localStorage
             const token = response.data.token;  // Assuming the token is in response.data.token?
             localStorage.setItem('token', token);  // Save token to localStorage
+
+            const role = response.data.role; //gets response role? come back BACK
+
             localStorage.setItem('role', role); //save role to local storage
 
             // Check if the token is successfully stored
@@ -107,6 +110,8 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
                 console.log('Role not stored');
             }
 
+
+            window.location.href = "../HTML/SSPLandingpage.html"; //Redirect to the landing page
 
 
             displayMessage('Login successful');
