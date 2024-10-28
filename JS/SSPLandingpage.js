@@ -31,8 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
         rootContent.style.display = 'block';
     } else if (role === 'STUDENT') {
         studentContent.style.display = 'block';
-    } else if (role === 'admin') {
-        adminContent.style.display = 'ADMIN';
+    } else if (role === 'ADMIN') {
+        adminContent.style.display = 'block';
     } else {
         // Handle unknown or missing roles if necessary
         console.error('No valid user role found');
