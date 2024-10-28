@@ -89,6 +89,7 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
             // Store the token in localStorage
             const token = response.data.token;  // Assuming the token is in response.data.token?
             localStorage.setItem('token', token);  // Save token to localStorage
+            localStorage.setItem('role', role); //save role to local storage
 
             // Check if the token is successfully stored
             if (localStorage.getItem('token')) {
@@ -97,6 +98,16 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
             else {
                 console.log('Token not stored');
             }
+
+            // Check if the role is successfully stored
+            if (localStorage.getItem('role')) {
+                console.log('Role stored successfully:', localStorage.getItem('role'));
+            }
+            else {
+                console.log('Role not stored');
+            }
+
+
 
             displayMessage('Login successful');
              
