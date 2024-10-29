@@ -42,13 +42,13 @@ document.getElementById('signupForm').addEventListener('submit',function (e) {
     const signUpData = {
         email: email,
         password: password,
-        usertype: usertype
+        user_type: usertype
 
     };
 
     // Use Axios to make the API request
 
-    axios.post('https://innovaid.dev/api/user/register', signUpData, headers: { 'Content-Type': 'application/json', 'Origin': window.location.origin })
+    axios.post('https://innovaid.dev/api/user/register', signUpData,)
         .then(function (response) {
             // Handle successful signup
             console.log('Sign Up successful', response.data);
