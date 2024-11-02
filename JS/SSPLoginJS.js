@@ -90,7 +90,7 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
             const token = response.data.token;  // Assuming the token is in response.data.token?
             localStorage.setItem('token', token);  // Save token to localStorage
 
-            const role = response.data.role; //gets response role? come back BACK
+            const role = response.data.role; 
 
             localStorage.setItem('role', role); //save role to local storage
 
