@@ -58,6 +58,13 @@ axios.get('https://innovaid.dev/api/queue', {
 //function to populate the table
 function populateTable(data) {
     const tableBody = document.getElementById('userTableBody');
+
+    // Ensure table body exists before modifying
+    if (!tableBody) {
+        console.error("Table body element not found");
+        return;
+    }
+
     tableBody.innerHTML = '';  // Clear existing rows
 
     data.forEach(user => {
@@ -73,8 +80,8 @@ function populateTable(data) {
    <td>${user_email}</td>
    <td>${request_type}</td>
     <td>
-        <button type="button" class="btn btn-allow btn-sm" onclick="handleDecision('${user_email}', 'allow')">Allow</button>
-        <button type="button" class="btn btn-deny btn-sm" onclick="handleDecision('${user_email}', 'deny')">Deny</button>
+        <button type="button" class="btn btn-allow btn-sm" onclick="allowUser('${user_email}')">Allow</button>
+        <button type="button" class="btn btn-deny btn-sm" onclick="denyUser('${user_email}')">Deny</button>
     </td>
 `;
 
@@ -85,23 +92,31 @@ tableBody.appendChild(row);
 
     });
 
-//    function handleDecision(email, approvalStatus) {
-//        // Create payload with necessary data
-//        const payload = {
-//            token: localStorage.getItem("token"),  // Assuming token is stored in local storage
-//            email: email,
-//            approval_status: approvalStatus  // 'approvalStatus' should be a boolean (true for approve, false for deny)
-//        };
+    function handleDecision(email, approvalStatus) {
+        // Create payload with necessary data
+        const payload = {
+            token: localStorage.getItem("token"),  // Assuming token is stored in local storage
+            email: email,
+            approval_status: approvalStatus  // 'approvalStatus' should be a boolean (true for approve, false for deny)
+        };
 
-//        // Send the decision to the backend
-//        axios.post('https://innovaid.dev/api/queue', payload)
-//            .then(response => {
-//                console.log("Decision sent successfully:", response.data);
-//                // Optionally, update the UI (e.g., remove the row or mark as approved/denied)
-//            })
-//            .catch(error => console.error("Error sending decision:", error));
-//    }
+        // Send the decision to the backend
+        axios.post('https://innovaid.dev/api/queue', payload)
+            .then(response => {
+                console.log("Decision sent successfully:", response.data);
+                // Optionally, update the UI (e.g., remove the row or mark as approved/denied)
+                const row = document.querySelector(`td[data-user-email="${email}"]`).parentElement;
+                if (row) row.remove(); // Remove the row upon successful response
+            })
+            .catch(error => console.error("Error sending decision:", error));
+    }
 
-//}
+}
+function allowUser(email) {
+    handleDecision(email, true);
+}
 
+function denyUser(email) {
+    handleDecision(email, false);
+}
 
