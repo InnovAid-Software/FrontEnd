@@ -49,16 +49,18 @@ axios.get('https://innovaid.dev/api/queue', {
 })
 
     .then(response => {
-        const users = response.data.users; 
-        populateTable(users);
+        const queueData = response.data;
+        console.log("Queue Data:", queueData);
+        populateTable(queueData);  // Call function to populate the table with retrieved data
     })
     .catch(error => console.error("Error fetching data:", error));
-
+   
 //function to populate the table
-function populateTable(users) {
+function populateTable(data) {
     const tableBody = document.getElementById('userTableBody');
+    tableBody.innerHTML = '';  // Clear existing rows
 
-    users.forEach(user => {
+    data.forEach(user => {
         // Extract necessary fields from each user object
 
         const user_email = user.user_email;
