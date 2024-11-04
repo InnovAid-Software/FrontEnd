@@ -38,3 +38,51 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error('No valid user role found');
     }
 });
+
+
+//fetch admin/root data from the backend
+
+axios.get(''https://innovaid.dev/api/user/queue', {
+    headers: {
+        Authorization: 'Bearer ${localStorage.getItem("token")}'
+    }
+})
+
+    .then(response => {
+        const users = response.data.users; 
+        populateTable(users);
+    })
+    .catch(error => console.error("Error fetching data:", error));
+
+//function to populate the table
+function populate(users) {
+    const tableBody = document.getElementById('userTableBody');
+
+    users.forEach(user => {
+        // Extract necessary fields from each user object
+
+        const user_email = user.user_email;
+        const request_type = user.request_type;
+
+        //create a new row and populate it
+        const row = document.createElement('tr');
+
+        row.innerHTML = `
+    <td data-user_email="${user_email}">${user_email}</td>
+    <td data-request_type="${request_type}">${request_type}</td>
+    <td>
+        <button type="button" class="btn btn-allow btn-sm" onclick="handleDecision('${user_email}', '${request_type}', 'allow')">Allow</button>
+        <button type="button" class="btn btn-deny btn-sm" onclick="handleDecision('${user_email}', '${request_type}', 'deny')">Deny</button>
+    </td>
+`;
+
+
+
+
+tableBody.appendChild(row);
+
+     });
+
+}
+
+
