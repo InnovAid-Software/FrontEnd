@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 //fetch admin/root data from the backend
 
-axios.get('https://innovaid.dev/api/user/queue', {
+axios.get('https://innovaid.dev/api/queue', {
     headers: {
         Authorization: 'Bearer ${localStorage.getItem("token")}'
     }
