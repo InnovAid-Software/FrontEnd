@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 //fetch admin/root data from the backend
 
-axios.get('api/queue', {
+axios.get('/api/queue', {
     headers: {
         Authorization: 'Bearer ${localStorage.getItem("token")}'
     }
@@ -101,7 +101,7 @@ tableBody.appendChild(row);
         };
 
         // Send the decision to the backend
-        axios.post('https://innovaid.dev/api/queue', payload)
+        axios.post('/api/queue', payload)
             .then(response => {
                 console.log("Decision sent successfully:", response.data);
                 // Optionally, update the UI (e.g., remove the row or mark as approved/denied)
