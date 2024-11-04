@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 //fetch admin/root data from the backend
 
-axios.get(''https://innovaid.dev/api/user/queue', {
+axios.get('https://innovaid.dev/api/user/queue', {
     headers: {
         Authorization: 'Bearer ${localStorage.getItem("token")}'
     }
@@ -55,7 +55,7 @@ axios.get(''https://innovaid.dev/api/user/queue', {
     .catch(error => console.error("Error fetching data:", error));
 
 //function to populate the table
-function populate(users) {
+function populateTable(users) {
     const tableBody = document.getElementById('userTableBody');
 
     users.forEach(user => {
