@@ -77,8 +77,9 @@ function populateTable(data) {
         const row = document.createElement('tr');
 
         row.innerHTML = `
-   <td>${user_email}</td>
    <td>${request_type}</td>
+   <td>${user_email}</td>
+   
     <td>
         <button type="button" class="btn btn-allow btn-sm" onclick="allowUser('${user_email}')">Allow</button>
         <button type="button" class="btn btn-deny btn-sm" onclick="denyUser('${user_email}')">Deny</button>
