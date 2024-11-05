@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
 axios.get('https://innovaid.dev/api/queue', {
     headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`
-        'Content-Type': 'application/json'
+        
     }
 })
 
