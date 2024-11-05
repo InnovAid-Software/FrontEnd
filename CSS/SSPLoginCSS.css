@@ -178,8 +178,16 @@ footer#colophon {
         padding: 30px;
     }
 
-        header.primary h2 {
+    header.primary h2 {
             font-size: 1.4rem;
+        }
+     .btn {
+            width: 250px; /* Narrower button container for tablets */
+        }
+    
+    .slider {
+            width: 125px; /* Half of the button width */
+            left: 0;
         }
 }
 
@@ -194,8 +202,17 @@ footer#colophon {
     }
 
     .container {
-        width: 95vw;
-        margin: 20px auto;
+        width: 90vw;
+        height: auto; /* Let the container adjust height based on content */
+    }
+
+    .btn {
+        width: 200px; /* Smaller width for mobile devices */
+    }
+
+    .slider {
+        width: 100px; /* Half of the button width for smaller screens */
+        top: 10px; /* Adjust positioning for smaller screen heights */
     }
     /*Adjust padding for header*/
     header.primary {
@@ -228,6 +245,14 @@ footer#colophon {
         width: 90vw; /* Slightly narrower container */
         margin: 10px auto;
     }
+    .btn {
+        width: 180px; /* Even smaller for very small devices */
+    }
+
+    .slider {
+        width: 90px; /* Align with the reduced button width */
+        top: 10px;
+    }
 }
 
 .container {
@@ -241,7 +266,7 @@ footer#colophon {
 
 .btn {
     height: 60px;
-    width: 300px;
+    width: 300px; /* Default width for larger screens */
     margin: 20px auto;
     box-shadow: 10px 10px 30px rgb(254, 215, 188);
     border-radius: 50px;
@@ -262,7 +287,7 @@ footer#colophon {
 
 .slider {
     height: 60px;
-    width: 50%;
+    width: 50%; /* Default width for larger screens */
     border-radius: 50px;
     background-image: linear-gradient(to right, rgb(255, 195, 110), rgb(255, 146, 91));
     position: absolute;
