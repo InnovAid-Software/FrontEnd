@@ -1,20 +1,34 @@
-let signup = document.querySelector(".signup");
-let login = document.querySelector(".login");
-let slider = document.querySelector(".slider");
-let formSection = document.querySelector(".form-section");
+const signupButton = document.querySelector('.signup');
+const loginButton = document.querySelector('.login');
+const slider = document.querySelector('.slider');
+const formSection = document.querySelector('.form-section');
 
-signup.addEventListener("click", () => {
-    slider.classList.add("moveslider");
+// Function to update slider position
+function updateSliderPosition(targetButton) {
+    // Set the width of the slider to the button's width
+    slider.style.width = `${targetButton.offsetWidth}px`;
+    // Align the slider's left position with the button's offset
+    slider.style.left = `${targetButton.offsetLeft}px`;
+}
+
+// Event listener for Signup button
+signupButton.addEventListener('click', () => {
+    updateSliderPosition(signupButton);
     formSection.classList.add("form-section-move");
 });
-
-login.addEventListener("click", () => {
-    slider.classList.remove("moveslider");
+// Event listener for Login button
+loginButton.addEventListener('click', () => {
+    updateSliderPosition(loginButton);
     formSection.classList.remove("form-section-move");
 });
+// Initial setup - set the slider position to the login button by default
+window.addEventListener('load', () => updateSliderPosition(loginButton));
 
- 
-
+// Update the slider position when resizing the window for responsiveness
+window.addEventListener('resize', () => {
+    const activeButton = formSection.classList.contains("form-section-move") ? signupButton : loginButton;
+    updateSliderPosition(activeButton);
+});
 
 
 const message = document.getElementById('message');
