@@ -57,7 +57,6 @@ document.getElementById('signupForm').addEventListener('submit',function (e) {
         email: email,
         password: password,
         user_type: usertype
-
     };
 
     // Use Axios to make the API request
@@ -72,7 +71,12 @@ document.getElementById('signupForm').addEventListener('submit',function (e) {
         .catch(function (error) {
             //handle signup error
             console.error('Error Signing Up:', error.response ? error.response.data : error.message);
-            displayMessage('Sign Up unsuccessful', false);
+            // Check if it's a duplicate email error
+            if (error.response && error.response.data.message === 'Email already registered') {
+                displayMessage('This email is already registered', false);
+            } else {
+                displayMessage('Sign Up unsuccessful', false);
+            }
         });
 });
 
