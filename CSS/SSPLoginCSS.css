@@ -183,11 +183,16 @@ footer#colophon {
         }
      .btn {
             width: 250px; /* Narrower button container for tablets */
+            gap: 15px;
         }
     
     .slider {
             width: 125px; /* Half of the button width */
             left: 0;
+        }
+    .form-section {
+            max-width: 800px; /* Adjusted width for tablets */
+            gap: 40px; /* Reduced gap between forms */
         }
 }
 
@@ -208,11 +213,19 @@ footer#colophon {
 
     .btn {
         width: 200px; /* Smaller width for mobile devices */
+        gap: 10px;
     }
 
     .slider {
         width: 100px; /* Half of the button width for smaller screens */
         top: 10px; /* Adjust positioning for smaller screen heights */
+    }
+    .form-section {
+        max-width: 90vw; /* Responsive width for smaller screens */
+        gap: 30px; /* Reduced gap for smaller screens */
+    }
+    .login-box, .signup-box {
+        width: 100%; /* Ensure forms take full width of container on small screens */
     }
     /*Adjust padding for header*/
     header.primary {
@@ -247,11 +260,18 @@ footer#colophon {
     }
     .btn {
         width: 180px; /* Even smaller for very small devices */
+        gap: 8px;
+        padding: 5px;
     }
 
     .slider {
         width: 90px; /* Align with the reduced button width */
         top: 10px;
+    }
+    .form-section {
+        max-width: 100vw; /* Full screen width for very small devices */
+        padding: 10px; /* Reduced padding */
+        gap: 20px; /* Smaller gap */
     }
 }
 
