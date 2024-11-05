@@ -44,8 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 axios.get('https://innovaid.dev/api/queue', {
     headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`
-        
+        'Authorization': `Bearer ${localStorage.getItem("token")}`
     }
 })
 
@@ -97,21 +96,21 @@ tableBody.appendChild(row);
     function handleDecision(email, approvalStatus) {
         // Create payload with necessary data
         const payload = {
-            token: localStorage.getItem("token"),  // Assuming token is stored in local storage
             email: email,
             approval_status: approvalStatus  // 'approvalStatus' should be a boolean (true for approve, false for deny)
         };
 
-        // Send the decision to the backend
-        axios.post('https://innovaid.dev/api/queue', payload)
-
-            .then(response => {
-                console.log("Decision sent successfully:", response.data);
-                // Optionally, update the UI (e.g., remove the row or mark as approved/denied)
-                const row = document.querySelector(`td[data-user-email="${email}"]`).parentElement;
-                if (row) row.remove();
-            })
-            .catch(error => console.error("Error sending decision:", error));
+        axios.post('https://innovaid.dev/api/queue', payload, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem("token")}`
+            }
+        })
+        .then(response => {
+            console.log("Decision sent successfully:", response.data);
+            const row = document.querySelector(`td[data-user-email="${email}"]`).parentElement;
+            if (row) row.remove();
+        })
+        .catch(error => console.error("Error sending decision:", error));
     }
 
 }
