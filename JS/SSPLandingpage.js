@@ -106,7 +106,7 @@ tableBody.appendChild(row);
                 console.log("Decision sent successfully:", response.data);
                 // Optionally, update the UI (e.g., remove the row or mark as approved/denied)
                 const row = document.querySelector(`td[data-user-email="${email}"]`).parentElement;
-                if (row) row.remove(); // Remove the row upon successful response
+                if (row) row.remove();
             })
             .catch(error => console.error("Error sending decision:", error));
     }
