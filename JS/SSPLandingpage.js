@@ -1,6 +1,6 @@
 const body = document.querySelector("body"),
-      modeToggle = body.querySelector(".mode-toggle");
-      sidebar = body.querySelector("nav");
+      modeToggle = body.querySelector(".mode-toggle"),
+      sidebar = body.querySelector("nav"),
       sidebarToggle = body.querySelector(".sidebar-toggle");
 
 modeToggle.addEventListener("click", () => {
@@ -77,43 +77,37 @@ function populateTable(data) {
         const row = document.createElement('tr');
 
         row.innerHTML = `
-        <td>${request_type}</td>
-  <td data-user-email="${user_email}">${user_email}</td>
-           <td>
-               <button type="button" class="btn btn-allow btn-sm" onclick="allowUser('${user_email}')">Allow</button>
-               <button type="button" class="btn btn-deny btn-sm" onclick="denyUser('${user_email}')">Deny</button>
-           </td>
-        
-`;
-
-
-
-
-tableBody.appendChild(row);
-
+            <td>${request_type}</td>
+            <td data-user-email="${user_email}">${user_email}</td>
+            <td>
+                <button type="button" class="btn btn-allow btn-sm" onclick="allowUser('${user_email}')">Allow</button>
+                <button type="button" class="btn btn-deny btn-sm" onclick="denyUser('${user_email}')">Deny</button>
+            </td>
+        `;
+        tableBody.appendChild(row);
     });
-
-    function handleDecision(email, approvalStatus) {
-        // Create payload with necessary data
-        const payload = {
-            email: email,
-            approval_status: approvalStatus  // 'approvalStatus' should be a boolean (true for approve, false for deny)
-        };
-
-        axios.post('https://innovaid.dev/api/queue', payload, {
-            headers: {
-                'Authorization': `Bearer ${localStorage.getItem("token")}`
-            }
-        })
-        .then(response => {
-            console.log("Decision sent successfully:", response.data);
-            const row = document.querySelector(`td[data-user-email="${email}"]`).parentElement;
-            if (row) row.remove();
-        })
-        .catch(error => console.error("Error sending decision:", error));
-    }
-
 }
+
+// Move handleDecision outside populateTable
+function handleDecision(email, approvalStatus) {
+    const payload = {
+        email: email,
+        approval_status: approvalStatus
+    };
+
+    axios.post('https://innovaid.dev/api/queue', payload, {
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem("token")}`
+        }
+    })
+    .then(response => {
+        console.log("Decision sent successfully:", response.data);
+        const row = document.querySelector(`td[data-user-email="${email}"]`).parentElement;
+        if (row) row.remove();
+    })
+    .catch(error => console.error("Error sending decision:", error));
+}
+
 function allowUser(email) {
     handleDecision(email, true);
 }
