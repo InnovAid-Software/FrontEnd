@@ -1,6 +1,6 @@
 const body = document.querySelector("body"),
-      modeToggle = body.querySelector(".mode-toggle");
-      sidebar = body.querySelector("nav");
+      modeToggle = body.querySelector(".mode-toggle"),
+      sidebar = body.querySelector("nav"),
       sidebarToggle = body.querySelector(".sidebar-toggle");
 
 modeToggle.addEventListener("click", () => {
@@ -45,6 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
 axios.get('https://innovaid.dev/api/queue', {
     headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`
+        
     }
 })
 
@@ -89,24 +90,25 @@ function populateTable(data) {
 
 
 
-        tableBody.appendChild(row);
+tableBody.appendChild(row);
 
     });
+}
 
     function handleDecision(email, approvalStatus) {
         // Create payload with necessary data
         const payload = {
+            token: localStorage.getItem("token"),  // Assuming token is stored in local storage
             email: email,
             approval_status: approvalStatus  // 'approvalStatus' should be a boolean (true for approve, false for deny)
         };
 
-        axios.post('https://innovaid.dev/api/queue', payload, {
-            headers: {
-                'Authorization': `Bearer ${localStorage.getItem("token")}`
-            }
-        })
+        // Send the decision to the backend
+        axios.post('https://innovaid.dev/api/queue', payload)
+
             .then(response => {
                 console.log("Decision sent successfully:", response.data);
+                // Optionally, update the UI (e.g., remove the row or mark as approved/denied)
                 const row = document.querySelector(`td[data-user-email="${email}"]`).parentElement;
                 if (row) row.remove();
             })
@@ -114,10 +116,6 @@ function populateTable(data) {
     }
 
 }
-
-
-
-
 function allowUser(email) {
     handleDecision(email, true);
 }
