@@ -11,7 +11,41 @@ sidebarToggle.addEventListener("click", () => {
     sidebar.classList.toggle("close");
 });
 
+//Event Listener for the 'Add' //icon click
+document.getElementById("addIcon").addEventListener("click", function () {
+    // Get the table body where rows will be added
+    var tableBody = document.getElementById("reservedTimesBody");
 
+    // Create a new row element
+    var newRow = document.createElement("tr");
+
+    // Create the input cell for the time
+    var timeCell = document.createElement("td");
+    var inputField = document.createElement("input");
+    inputField.type = "text";
+    inputField.classList.add("form-control-md");
+    inputField.placeholder = "Enter time";
+    timeCell.appendChild(inputField);
+    // Create the delete button cell
+    var deleteCell = document.createElement("td");
+    var deleteButton = document.createElement("button");
+    deleteButton.type = "button";
+    deleteButton.classList.add("btn", "btn-link", "p-0", "text-danger");
+    deleteButton.innerHTML = '<i class="bi bi-trash"></i>';  // Trash Icon
+    // Add event listener for the delete button
+    deleteButton.addEventListener("click", function () {
+        tableBody.removeChild(newRow);  // Remove the row when clicked
+    });
+
+    deleteCell.appendChild(deleteButton);
+
+    // Append both cells to the new row
+    newRow.appendChild(timeCell);
+    newRow.appendChild(deleteCell);
+
+    // Append the new row to the table body
+    tableBody.appendChild(newRow);
+});
 
 document.addEventListener('DOMContentLoaded', () => {
     //is a way to make sure that your JavaScript
