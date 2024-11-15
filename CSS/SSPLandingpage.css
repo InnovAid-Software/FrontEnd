@@ -383,14 +383,14 @@ nav.close ~ .dashboard .top {
 
 
 
-.btn-primary {
+#studentContent .btn-primary {
     background-color: #c8a200 !important; /* Gold*/
 }
 
-.btn-secondary {
+#studentContent .btn-secondary {
     background-color: #c8a200 !important;
 }
 
-.btn-info {
+#studentContent .btn-info {
     background-color: #c8a200 !important;
 }
