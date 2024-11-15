@@ -372,3 +372,25 @@ nav.close ~ .dashboard .top {
     color: white;
     border: none;
 }
+
+
+
+
+#studentContent .container {
+    margin-top: -900px; /* Move the table upward */
+}
+
+
+
+
+.btn-primary {
+    background-color: #c8a200 !important; /* Gold*/
+}
+
+.btn-secondary {
+    background-color: #c8a200 !important;
+}
+
+.btn-info {
+    background-color: #c8a200 !important;
+}

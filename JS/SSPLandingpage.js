@@ -11,7 +11,8 @@ sidebarToggle.addEventListener("click", () => {
     sidebar.classList.toggle("close");
 });
 
-//Event Listener for the 'Add' //icon click
+//Student Homepage
+//Event Listener for the 'Add' icon click
 document.getElementById("addIcon").addEventListener("click", function () {
     // Get the table body where rows will be added
     var tableBody = document.getElementById("reservedTimesBody");
@@ -57,6 +58,9 @@ document.getElementById("addIcon").addEventListener("click", function () {
     tableBody.appendChild(newRow);
 });
 
+
+
+//Root User
 document.addEventListener('DOMContentLoaded', () => {
     //is a way to make sure that your JavaScript
     //only runs after the HTML document has finished loading.
