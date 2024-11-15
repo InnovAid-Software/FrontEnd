@@ -21,16 +21,26 @@ document.getElementById("addIcon").addEventListener("click", function () {
 
     // Create the input cell for the time
     var timeCell = document.createElement("td");
+    
     var inputField = document.createElement("input");
+
     inputField.type = "text";
+
     inputField.classList.add("form-control-md");
+
     inputField.placeholder = "Enter time";
+
     timeCell.appendChild(inputField);
     // Create the delete button cell
+
     var deleteCell = document.createElement("td");
+
     var deleteButton = document.createElement("button");
+
     deleteButton.type = "button";
+
     deleteButton.classList.add("btn", "btn-link", "p-0", "text-danger");
+
     deleteButton.innerHTML = '<i class="bi bi-trash"></i>';  // Trash Icon
     // Add event listener for the delete button
     deleteButton.addEventListener("click", function () {
@@ -149,7 +159,7 @@ tableBody.appendChild(row);
             .catch(error => console.error("Error sending decision:", error));
     }
 
-}
+
 function allowUser(email) {
     handleDecision(email, true);
 }
