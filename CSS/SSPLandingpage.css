@@ -1,7 +1,7 @@
 
 
 
-#rootContent, #adminContent {
+#rootContent, #studentContent, #adminContent {
     display: none; /* Hide by default rootContent */
 }
 /*Font*/
