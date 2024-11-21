@@ -376,21 +376,61 @@ nav.close ~ .dashboard .top {
 
 
 
+body {
+    direction: ltr;
+}
+
 #studentContent .container {
     margin-top: -900px; /* Move the table upward */
+    width: 100%; /* Ensure the container takes up the full width */
+    overflow: visible; /* Avoid hiding margins */
 }
 
 
-
-
+/* Generate button */
 #studentContent .btn-primary {
-    background-color: #c8a200 !important; /* Gold*/
+    background-color: #294868 !important; /* Gold*/
+    margin-bottom: -150px;
 }
 
 #studentContent .btn-secondary {
-    background-color: #c8a200 !important;
+    background-color: #294868 !important;
 }
 
 #studentContent .btn-info {
-    background-color: #c8a200 !important;
+    background-color: #294868 !important;
+}
+
+#CoursesAvailableHeader {
+    margin-left: 370px;
+}
+
+.table-bordered {
+    border-collapse: collapse; /* Can mess with spacing */
+}
+
+#ReservedTimesTable {
+    margin-top: 150px; /* Adjust this value to your preference */
+    margin-left: -500px !important;
+}
+
+#ProposedCoursesTable {
+    margin-left: -150px;
+}
+
+
+
+#CoursesAvailableTable {
+    margin-left: 280px;
+}
+
+#CoursesSelectedHeader {
+    margin-left: -140px;
+}
+/* Change the background color of row headers */
+#studentContent thead th {
+    background-color: #ffd699;
+    text-transform: uppercase; /* Optional: Make the text uppercase */
+    font-weight: bold; /* Optional: Make the text bold */
+    text-align: center; /* Optional: Center-align text */
 }
