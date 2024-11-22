@@ -389,16 +389,16 @@ body {
 
 /* Generate button */
 #studentContent .btn-primary {
-    background-color: #294868 !important; /* Gold*/
+    background-color: #294868 !important;
     margin-bottom: -150px;
 }
 
 #studentContent .btn-secondary {
-    background-color: #294868 !important;
+    background-color: #198754 !important;
 }
 
 #studentContent .btn-info {
-    background-color: #294868 !important;
+    background-color: #198754 !important;
 }
 
 #CoursesAvailableHeader {
@@ -424,13 +424,23 @@ body {
     margin-left: 280px;
 }
 
-#CoursesSelectedHeader {
-    margin-left: -140px;
-}
 /* Change the background color of row headers */
 #studentContent thead th {
     background-color: #ffd699;
     text-transform: uppercase; /* Optional: Make the text uppercase */
     font-weight: bold; /* Optional: Make the text bold */
     text-align: center; /* Optional: Center-align text */
+}
+
+#ReservedTimesTable caption {
+    color: black;
+}
+
+
+#ProposedCoursesTable caption {
+    color: black;
+}
+
+#CoursesAvailableTable caption {
+    color: black;
 }
