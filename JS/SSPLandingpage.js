@@ -13,51 +13,36 @@ sidebarToggle.addEventListener("click", () => {
 
 //Student Homepage
 //Event Listener for the 'Add' icon click
-document.getElementById("addIcon").addEventListener("click", function () {
-    // Get the table body where rows will be added
-    var tableBody = document.getElementById("reservedTimesBody");
+document.addEventListener("DOMContentLoaded", () => {
+    const tableBody = document.getElementById("reservedTimesBody");
+    const addIcon = document.getElementById("addIcon");
 
-    // Create a new row element
-    var newRow = document.createElement("tr");
-
-    // Create the input cell for the time
-    var timeCell = document.createElement("td");
-    
-    var inputField = document.createElement("input");
-
-    inputField.type = "text";
-
-    inputField.classList.add("form-control-md");
-
-    inputField.placeholder = "Enter time";
-
-    timeCell.appendChild(inputField);
-    // Create the delete button cell
-
-    var deleteCell = document.createElement("td");
-
-    var deleteButton = document.createElement("button");
-
-    deleteButton.type = "button";
-
-    deleteButton.classList.add("btn", "btn-link", "p-0", "text-danger");
-
-    deleteButton.innerHTML = '<i class="bi bi-trash"></i>';  // Trash Icon
-    // Add event listener for the delete button
-    deleteButton.addEventListener("click", function () {
-        tableBody.removeChild(newRow);  // Remove the row when clicked
+    // Add functionality to the delete buttons in default rows
+    tableBody.addEventListener("click", (event) => {
+        if (event.target.closest(".remove-button")) {
+            const row = event.target.closest("tr");
+            tableBody.removeChild(row);
+        }
     });
 
-    deleteCell.appendChild(deleteButton);
+    // Add a new row when the add icon is clicked
+    addIcon.addEventListener("click", () => {
+        const newRow = document.createElement("tr");
 
-    // Append both cells to the new row
-    newRow.appendChild(timeCell);
-    newRow.appendChild(deleteCell);
+        newRow.innerHTML = `
+            <td><input type="text" class="form-control-sm" placeholder="Ex: 0900"></td>
+            <td><input type="text" class="form-control-sm" placeholder="Ex: 1200"></td>
+            <td><input type="text" class="form-control-sm" placeholder="Lunch time"></td>
+            <td>
+                <button type="button" class="btn btn-link p-0 text-danger remove-button">
+                    <i class="bi bi-trash"></i>
+                </button>
+            </td>
+        `;
 
-    // Append the new row to the table body
-    tableBody.appendChild(newRow);
+        tableBody.appendChild(newRow);
+    });
 });
-
 
 
 //Root User

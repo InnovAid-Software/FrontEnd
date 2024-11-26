@@ -380,49 +380,59 @@ body {
     direction: ltr;
 }
 
+
+/*Student Content*/
 #studentContent .container {
     margin-top: -900px; /* Move the table upward */
     width: 100%; /* Ensure the container takes up the full width */
     overflow: visible; /* Avoid hiding margins */
 }
 
-
+/*Student Content*/
 /* Generate button */
 #studentContent .btn-primary {
     background-color: #294868 !important;
     margin-bottom: -150px;
 }
 
+/*Student Content*/
 #studentContent .btn-secondary {
     background-color: #198754 !important;
 }
 
+/*Student Content*/
 #studentContent .btn-info {
     background-color: #198754 !important;
 }
 
+/*Student Content*/
 #CoursesAvailableHeader {
     margin-left: 370px;
 }
 
+/*Student Content*/
 .table-bordered {
     border-collapse: collapse; /* Can mess with spacing */
 }
 
+/*Student Content*/
 #ReservedTimesTable {
     margin-top: 150px; /* Adjust this value to your preference */
     margin-left: -500px !important;
 }
 
+/*Student Content*/
 #ProposedCoursesTable {
     margin-left: -150px;
 }
 
 
-
+/*Student Content*/
 #CoursesAvailableTable {
     margin-left: 280px;
 }
+
+/*Student Content*/
 
 /* Change the background color of row headers */
 #studentContent thead th {
@@ -432,15 +442,18 @@ body {
     text-align: center; /* Optional: Center-align text */
 }
 
+/*Student Content*/
 #ReservedTimesTable caption {
     color: black;
 }
 
-
+/*Student Content*/
 #ProposedCoursesTable caption {
     color: black;
 }
 
+
+/*Student Content*/
 #CoursesAvailableTable caption {
     color: black;
 }
