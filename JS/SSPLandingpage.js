@@ -305,7 +305,7 @@ function saveSections() {
     });
 
     // Send updatedSections to the backend
-    fetch("/api/save-sections", {
+    fetch("https://innovaid.dev/api/schedule", {
         method: "POST",
         headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
