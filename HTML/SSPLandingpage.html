@@ -219,11 +219,45 @@
 
 
                 <div id="adminContent" style="display: none;">
-                    <!-- Student-specific content goes here -->
-                    <h1>Welcome, Admin!</h1>
-                    <p>This is the Admin page.</p>-->
-                    <!-- Additional student features and information -->
+                
+                        <div class="container mt-5">
+                            <h2>Course/Section Schedule</h2>
+
+                            <!-- Table -->
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Department ID</th>
+                                            <th>Course Number</th>
+                                            <th>Section ID</th>
+                                            <th>Instructor</th>
+                                            <th>Days</th>
+                                            <th>Start Time</th>
+                                            <th>End Time</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="schedule-table-body">
+                                        <!-- Dynamic rows will be inserted here -->
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- Buttons for Add, Import, Save -->
+                            <div class="d-flex justify-content-between mt-3">
+                                <button class="btn btn-primary btn-add" onclick="addNewSection()">+</button>
+                                <button class="btn btn-secondary" onclick="importCSV()">Import</button>
+                                <button class="btn btn-success" onclick="saveSections()">Save</button>
+                            </div>
+
+                            <!-- Hidden Input for CSV Upload -->
+                            <input type="file" id="csv-file-input" style="display: none;" accept=".csv" onchange="handleCSVUpload(event)">
+                        </div>
+                        <!-- Additional Admin features and information -->
                 </div>
+
+            </div>
 
 
 

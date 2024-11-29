@@ -457,3 +457,64 @@ body {
 #CoursesAvailableTable caption {
     color: black;
 }
+
+
+
+#adminContent h2 {
+    font-weight: bold;
+    color: #294868;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Table Styles */
+#adminContent .table {
+    background-color: #ffd699;
+    border: 1px solid #294868;
+}
+
+    #adminContent .table th {
+        background-color: #294868;
+        color: white;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    #adminContent .table td {
+        vertical-align: middle;
+        text-align: center;
+    }
+
+/* Button Styles */
+#adminContent .btn-primary,
+#adminContent .btn-secondary,
+#adminContent .btn-success {
+    font-weight: bold;
+}
+
+#adminContent .btn-add {
+    background-color: #294868;
+    color: white;
+}
+
+    #adminContent .btn-add:hover {
+        background-color: #19324d;
+    }
+
+#adminContent .btn-secondary {
+    background-color: #5bc0de;
+    color: white;
+}
+
+    #adminContent .btn-secondary:hover {
+        background-color: #31b0d5;
+    }
+
+#adminContent .btn-success {
+    background-color: #5cb85c;
+    color: white;
+}
+
+    #adminContent .btn-success:hover {
+        background-color: #4cae4c;
+    }
