@@ -278,6 +278,9 @@ function handleCSVUpload(event) {
 renderSections();
 
 
+
+
+
 //Root User
 document.addEventListener('DOMContentLoaded', () => {
     //is a way to make sure that your JavaScript
