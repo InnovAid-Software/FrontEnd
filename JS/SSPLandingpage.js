@@ -277,9 +277,55 @@ function handleCSVUpload(event) {
 // Initial rendering of the table
 renderSections();
 
+function saveSections() {
+    const tableBody = document.getElementById("schedule-table-body");
+    const rows = tableBody.querySelectorAll("tr");
 
+    // Array to hold all section data
+    const updatedSections = [];
 
+    // Loop through each row in the table
+    rows.forEach(row => {
+        const inputs = row.querySelectorAll("input");
+        const checkboxes = row.querySelectorAll("input[type='checkbox']");
 
+        const section = {
+            departmentId: inputs[0].value,
+            courseNumber: inputs[1].value,
+            sectionId: inputs[2].value,
+            instructor: inputs[3].value,
+            days: Array.from(checkboxes)
+                .filter(checkbox => checkbox.checked)
+                .map(checkbox => checkbox.value),
+            startTime: inputs[4].value,
+            endTime: inputs[5].value,
+        };
+
+        updatedSections.push(section);
+    });
+
+    // Send updatedSections to the backend
+    fetch("/api/save-sections", {
+        method: "POST",
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify(updatedSections),
+    })
+        .then(response => {
+            if (response.ok) {
+                alert("Sections saved successfully!");
+            } else {
+                return response.json().then(err => {
+                    throw new Error(err.message || "Failed to save sections.");
+                });
+            }
+        })
+        .catch(error => {
+            console.error("Error saving sections:", error);
+            alert("An error occurred while saving the sections.");
+        });
+}
 
 //Root User
 document.addEventListener('DOMContentLoaded', () => {
