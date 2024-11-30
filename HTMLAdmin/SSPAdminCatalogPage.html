@@ -1,11 +1,74 @@
 ﻿<!DOCTYPE html>
 
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
+
 <head>
-    <meta charset="utf-8" />
-    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- CSS -->
+    <link href="../CSSAdmin/SSPAdminCatalog.css" rel="stylesheet" />
+    <!-- Boxicons CSS -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+
+
+    <!-- Axios for API requests -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
+    <div class="container mt-5">
+        <h2>Catalog of Courses</h2>
+
+        <!-- Table -->
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Department ID</th>
+                        <th>Course Number</th>
+                        <th>Course Title</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="course-table-body">
+                    <!-- Dynamic rows will be inserted here -->
+                    <tr>
+                        <td><input type="text" class="form-control" placeholder="Dept ID"></td>
+                        <td><input type="text" class="form-control" placeholder="Course Number"></td>
+                        <td><input type="text" class="form-control" placeholder="Course Title"></td>
+                        <td>
+                            <button type="button" class="btn btn-link p-0 text-danger">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Buttons for Add, Import, Save -->
+    <div class="d-flex justify-content-between mt-3">
+        <button class="btn btn-primary" onclick="addNewCourse()">+</button>
+        <button class="btn btn-secondary" onclick="importCSV()">Import</button>
+        <button class="btn btn-success" onclick="saveCourses()">Save</button>
+    </div>
+
+    <!-- Hidden Input for CSV Upload -->
+    <input type="file" id="csv-file-input" style="display: none;" accept=".csv" onchange="handleCSVUpload(event)">
+
+
+
+    <script src="../JSAdmin/SSPAdminCatalogJS.js"></script>
+    <!-- Bootstrap 4.5.2 JS (include before the closing body tag) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
 
 </body>
 </html>
