@@ -341,13 +341,84 @@ document.addEventListener('DOMContentLoaded', () => {
     const studentContent = document.getElementById('studentContent');
     const adminContent = document.getElementById('adminContent');
 
+    // Define navigation menu items
+    const navLinks = document.querySelector('.nav-links');
+
+    // Clear existing links
+    navLinks.innerHTML = '';
+
+
+
     // Show the relevant content based on the role
     if (role === 'ROOT') {
         rootContent.style.display = 'block';
+
+        navLinks.innerHTML = `  
+        <li>
+        <a href="#">
+            <i class='bx bx-home'></i>
+            <span class="link-name">Dashboard</span>
+        </a>
+    </li>
+    <li>
+        <a href="#">
+            <i class='bx bx-file'></i>
+            <span class="link-name">Catalog</span>
+        </a>
+    </li>
+    <li>
+        <a href="#">
+            <i class='bx bx-cog'></i>
+            <span class="link-name">Course Sections</span>
+        </a>
+    </li>
+</ul>
+
+
+    </li> `;
+
+
     } else if (role === 'STUDENT') {
         studentContent.style.display = 'block';
+        navLinks.innerHTML = `  
+        <li>
+        <a href="#">
+            <i class='bx bx-home'></i>
+            <span class="link-name">HomePage</span>
+        </a>
+    </li>
+    <li>
+        <a href="#">
+            <i class='bx bx-file'></i>
+            <span class="link-name">Saved Schedules</span>
+        </a>
+    </li>
+   
+</ul>
+
+
+    </li> `;
+
     } else if (role === 'ADMIN') {
         adminContent.style.display = 'block';
+        navLinks.innerHTML = `  
+        <li>
+        <a href="#">
+            <i class='bx bx-home'></i>
+            <span class="link-name">Course Sections</span>
+        </a>
+    </li>
+    <li>
+        <a href="#">
+            <i class='bx bx-file'></i>
+            <span class="link-name">Catalog</span>
+        </a>
+    </li>
+   
+</ul>
+
+
+    </li> `;
     } else {
         // Handle unknown or missing roles if necessary
         console.error('No valid user role found');
