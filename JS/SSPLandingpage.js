@@ -305,27 +305,24 @@ function saveSections() {
     });
 
     // Send updatedSections to the backend
-    fetch("https://innovaid.dev/api/schedule", {
-        method: "POST",
+    // Use Axios to send updatedSections to the backend
+    axios.post('https://innovaid.dev/api/schedule', updatedSections, {
         headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
-        body: JSON.stringify(updatedSections),
     })
-        .then(response => {
-            if (response.ok) {
-                alert("Sections saved successfully!");
-            } else {
-                return response.json().then(err => {
-                    throw new Error(err.message || "Failed to save sections.");
-                });
-            }
+        .then(function (response) {
+            // Handle successful save
+            console.log('Sections saved successfully', response.data);
+            alert('Sections saved successfully!');
         })
-        .catch(error => {
-            console.error("Error saving sections:", error);
-            alert("An error occurred while saving the sections.");
+        .catch(function (error) {
+            // Handle errors
+            console.error('Error saving sections:', error.response?.data || error.message);
+            alert('An error occurred while saving the sections.');
         });
 }
+
 
 //Root User
 document.addEventListener('DOMContentLoaded', () => {

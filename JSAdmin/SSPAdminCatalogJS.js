@@ -96,3 +96,36 @@ function handleCSVUpload(event) {
 renderCourses();
 
 // Function to save courses to the backend
+function saveCourses() {
+    // Prepare the payload with organized data
+    const catalogAdmin = courses.map(course => ({
+        departmentId: course.departmentId,
+        courseNumber: course.courseNumber,
+        courseTitle: course.courseTitle,
+    }));
+
+    // Check if the payload is empty
+    if (payload.length === 0) {
+        alert("No courses to save.");
+        return;
+    }
+
+    // Use Axios to send the payload to the backend
+    axios.post("https://innovaid.dev/api/schedule", catalogAdmin, {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`, // Replace with your token logic
+            
+        },
+    })
+        .then(function (response) {
+            // Handle successful response
+            console.log("Catalog Courses saved successfully:", response.data);
+            alert("Courses saved successfully!");
+        })
+        .catch(function (error) {
+            // Handle errors
+            console.error("Error saving catalog courses:", error.response?.data || error.message);
+            alert("An error occurred while saving the catalog courses.");
+        });
+
+}
