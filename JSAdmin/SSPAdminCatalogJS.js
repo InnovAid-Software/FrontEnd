@@ -91,7 +91,8 @@ function handleCSVUpload(event) {
     }
 }
 
-// Function to save courses to the backend
 
 // Initial rendering of the table
 renderCourses();
+
+// Function to save courses to the backend
