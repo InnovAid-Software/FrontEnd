@@ -352,7 +352,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         navLinks.innerHTML = `  
         <li>
-        <a href="#">
+        <a href="../HTML/SSPLandingpage.html">
             <i class='bx bx-home'></i>
             <span class="link-name">Dashboard</span>
         </a>
@@ -379,7 +379,7 @@ document.addEventListener('DOMContentLoaded', () => {
         studentContent.style.display = 'block';
         navLinks.innerHTML = `  
         <li>
-        <a href="#">
+        <a href="../HTML/SSPLandingpage.html">
             <i class='bx bx-home'></i>
             <span class="link-name">HomePage</span>
         </a>
@@ -400,13 +400,13 @@ document.addEventListener('DOMContentLoaded', () => {
         adminContent.style.display = 'block';
         navLinks.innerHTML = `  
         <li>
-        <a href="#">
+        <a href="../HTML/SSPLandingpage.html">
             <i class='bx bx-home'></i>
             <span class="link-name">Course Sections</span>
         </a>
     </li>
     <li>
-        <a href="#">
+        <a href="../HTMLAdmin/SSPAdminCatalogPage.html">
             <i class='bx bx-file'></i>
             <span class="link-name">Catalog</span>
         </a>
