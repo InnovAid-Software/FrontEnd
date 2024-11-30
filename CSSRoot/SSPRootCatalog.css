@@ -1,3 +1,39 @@
-﻿body
-{
+﻿
+.h2 {
+    font-weight: bold;
+    color: #294868;
+    text-align: center;
+    margin-bottom: 30px;
 }
+
+.table {
+    background-color: #ffd699;
+    border: 1px solid #294868;
+}
+
+    .table th {
+        background-color: #294868;
+        color: white;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .table td {
+        vertical-align: middle;
+        text-align: center;
+    }
+
+.btn-primary,
+.btn-secondary,
+.btn-success {
+    font-weight: bold;
+}
+
+.btn-add {
+    background-color: #294868;
+    color: white;
+}
+
+    .btn-add:hover {
+        background-color: #19324d;
+    }
