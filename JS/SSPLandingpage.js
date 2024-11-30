@@ -358,13 +358,13 @@ document.addEventListener('DOMContentLoaded', () => {
         </a>
     </li>
     <li>
-        <a href="#">
+        <a href="../HTMLRoot/SSPRootCatalogPage.html">
             <i class='bx bx-file'></i>
             <span class="link-name">Catalog</span>
         </a>
     </li>
     <li>
-        <a href="#">
+        <a href="../HTMLRoot/SSPRootCourseSectionsPage.html">
             <i class='bx bx-cog'></i>
             <span class="link-name">Course Sections</span>
         </a>
