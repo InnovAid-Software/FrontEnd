@@ -271,7 +271,7 @@ function handleCSVUpload(event) {
     }
 }
 
-// Function to save sections to the backend
+
 
 
 // Initial rendering of the table
@@ -352,19 +352,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         navLinks.innerHTML = `  
         <li>
-        <a href="../HTML/SSPLandingpage.html">
+        <a href="#">
             <i class='bx bx-home'></i>
             <span class="link-name">Dashboard</span>
         </a>
     </li>
     <li>
-        <a href="../HTMLRoot/SSPRootCatalogPage.html">
+        <a href="#">
             <i class='bx bx-file'></i>
             <span class="link-name">Catalog</span>
         </a>
     </li>
     <li>
-        <a href="../HTMLRoot/SSPRootCourseSectionsPage.html">
+        <a href="#">
             <i class='bx bx-cog'></i>
             <span class="link-name">Course Sections</span>
         </a>
@@ -379,7 +379,7 @@ document.addEventListener('DOMContentLoaded', () => {
         studentContent.style.display = 'block';
         navLinks.innerHTML = `  
         <li>
-        <a href="../HTML/SSPLandingpage.html">
+        <a href="#">
             <i class='bx bx-home'></i>
             <span class="link-name">HomePage</span>
         </a>
@@ -400,13 +400,13 @@ document.addEventListener('DOMContentLoaded', () => {
         adminContent.style.display = 'block';
         navLinks.innerHTML = `  
         <li>
-        <a href="../HTML/SSPLandingpage.html">
+        <a href="#">
             <i class='bx bx-home'></i>
             <span class="link-name">Course Sections</span>
         </a>
     </li>
     <li>
-        <a href="../HTMLAdmin/SSPAdminCatalogPage.html">
+        <a href="#">
             <i class='bx bx-file'></i>
             <span class="link-name">Catalog</span>
         </a>
