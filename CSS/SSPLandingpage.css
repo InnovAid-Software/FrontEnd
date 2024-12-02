@@ -80,12 +80,7 @@ body {
 
 
 
-/*Student Content*/
-#studentContent .container {
-    margin-top: -900px; /* Move the table upward */
-    width: 100%; /* Ensure the container takes up the full width */
-    overflow: visible; /* Avoid hiding margins */
-}
+
 
 /*Student Content*/
 /* Generate button */
