@@ -1,364 +1,65 @@
 
 
 
- #studentContent, #adminContent {
+ #studentContent, #rootContent{
     display: none; /* Hide by default rootContent */
 }
-/*Font*/
-@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-* {
-    .kanit-thin
-
-{
-    font-family: "Kanit", sans-serif;
-    font-weight: 100;
-    font-style: normal;
-}
-
-.kanit-extralight {
-    font-family: "Kanit", sans-serif;
-    font-weight: 200;
-    font-style: normal;
-}
-
-.kanit-light {
-    font-family: "Kanit", sans-serif;
-    font-weight: 300;
-    font-style: normal;
-}
-
-.kanit-regular {
-    font-family: "Kanit", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-}
-
-.kanit-medium {
-    font-family: "Kanit", sans-serif;
-    font-weight: 500;
-    font-style: normal;
-}
-
-.kanit-semibold {
-    font-family: "Kanit", sans-serif;
-    font-weight: 600;
-    font-style: normal;
-}
-
-.kanit-bold {
-    font-family: "Kanit", sans-serif;
-    font-weight: 700;
-    font-style: normal;
-}
-
-.kanit-extrabold {
-    font-family: "Kanit", sans-serif;
-    font-weight: 800;
-    font-style: normal;
-}
-
-.kanit-black {
-    font-family: "Kanit", sans-serif;
-    font-weight: 900;
-    font-style: normal;
-}
-
-.kanit-thin-italic {
-    font-family: "Kanit", sans-serif;
-    font-weight: 100;
-    font-style: italic;
-}
-
-.kanit-extralight-italic {
-    font-family: "Kanit", sans-serif;
-    font-weight: 200;
-    font-style: italic;
-}
-
-.kanit-light-italic {
-    font-family: "Kanit", sans-serif;
-    font-weight: 300;
-    font-style: italic;
-}
-
-.kanit-regular-italic {
-    font-family: "Kanit", sans-serif;
-    font-weight: 400;
-    font-style: italic;
-}
-
-.kanit-medium-italic {
-    font-family: "Kanit", sans-serif;
-    font-weight: 500;
-    font-style: italic;
-}
-
-.kanit-semibold-italic {
-    font-family: "Kanit", sans-serif;
-    font-weight: 600;
-    font-style: italic;
-}
-
-.kanit-bold-italic {
-    font-family: "Kanit", sans-serif;
-    font-weight: 700;
-    font-style: italic;
-}
-
-.kanit-extrabold-italic {
-    font-family: "Kanit", sans-serif;
-    font-weight: 800;
-    font-style: italic;
-}
-
-.kanit-black-italic {
-    font-family: "Kanit", sans-serif;
-    font-weight: 900;
-    font-style: italic;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-
-
-:root {
-    /* ===== Colors ===== */
-
-    --panel-color: #FFF;
-    --text-color: #000;
-    --black-light-color: #707070;
-    --border-color: #e6e5e5;
-    --toggle-color: #DDD;
-    --box1-color: #4DA3FF;
-    --box2-color: #FFE6AC;
-    --box3-color: #E7D1FC;
-    --title-icon-color: #fff;
-    /* ===== Transition ===== */
-    --tran-05: all 0.5s ease;
-    --tran-03: all 0.3s ease;
-    --tran-02: all 0.2s ease;
-}
-
-body {
-    min-height: 100vh;
-    background-color: var(--primary-color);
-}
-
-    body.dark {
-        --primary-color: #3A3B3C;
-        --panel-color: #242526;
-        --text-color: #CCC;
-        --black-light-color: #CCC;
-        --border-color: #4D4C4C;
-        --toggle-color: #FFF;
-        --box1-color: #3A3B3C;
-        --box2-color: #3A3B3C;
-        --box3-color: #3A3B3C;
-        --title-icon-color: #CCC;
-    }
-
-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 250px;
-    padding: 10px 14px;
-    background-color: var(--panel-color);
-    border-right: 1x solid var(--border-color);
-    transition: var(--tran-05);
-}
-
-    nav.close {
-        width: 73px;
-    }
-
-    nav .logo-name {
-        display: flex;
-        align-items: center;
-    }
-
-    nav .logo {
-        display: flex;
-        justify-content: center;
-        min-width: 45px;
-        background-color: rgb(46, 128, 252);
-    }
-
-    nav .logo-image img {
-        width: 40px;
-        object-fit: cover;
-        border-radius: 50%;
-    }
-
-    nav .logo .logo-name {
-        font-size: 22px;
-        font-weight: 600;
-        color: var(--text-color);
-        margin-left: 14px;
-        transition: var(--tran-05);
-    }
-
-    nav.close .logo-name {
-        opacity: 0;
-        pointer-events: none;
-    }
-
-    nav .menu-items {
-        margin-top: 40px;
-        height: calc(100% - 90px);
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
-
-.menu-items li {
-    list-style: none;
-}
-
-    .menu-items li a {
-        display: flex;
-        align-items: center;
-        height: 50px;
-        text-decoration: none;
-        position: relative;
-    }
-
-.nav-links li a:hover:before {
-    content: "";
-    position: absolute;
-    left: -7px;
-    height: 5px;
-    width: 5px;
-    border-radius: 50%;
-    background-color: var(--primary-color);
-}
-
-body.dark li a:hover::before {
-    background-color: var(--text-color);
-}
-
-.menu-items li a i {
-    font-size: 24px;
-    min-width: 45px;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--black-light-color);
-}
-
-.menu-items li a .link-name {
-    font-size: 18px;
-    font-weight: 400;
-    color: var(--black-light-color);
-    transition: var(--tran-05);
-}
-
-nav.close li a .link-name {
-    opacity: 0;
-    pointer-events: none;
-}
-
-.nav-links li a:hover i,
-.nav-links li a:hover .link-name {
-    color: var(--primary-color);
-}
-
-body.dark .nav-links li a:hover i,
-body.dark .nav-links li a:hover .link-name {
-    color: var(--text-color)
-}
-
-.menu-items .logout-mode {
-    padding-top: 10px;
-    border-top: 1x solid var(--border-color);
-}
-
-.menu-items .mode {
-    display: flex;
-    align-items: center;
-    white-space: nowrap;
-}
-
-.menu-items .mode-toggle {
-    position: absolute;
-    right: 14px;
-    height: 50px;
-    min-width: 45px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
-
-.mode-toggle .switch {
-    position: relative;
-    display: inline-block;
-    height: 22px;
-    width: 40px;
-    border-radius: 25px;
-    background-color: var(--toggle-color);
-}
-
-.switch:before {
-    content: "";
-    position: absolute;
-    left: 5px;
-    top: 50%;
-    transform: translateY(-50%);
-    height: 15px;
-    width: 15px;
-    background-color: var(--panel-color);
-    border-radius: 50%;
-    transition: var(--tran-03);
-}
-
-body.dark .switch::before {
-    left: 20px;
-}
-
-.dashboard {
-    position: relative;
-    left: 245px;
-    background-color: var(--primary-color);
+/* Navbar Custom Styles */
+.navbar-custom {
     height: 100vh;
-    width: calc(100% - 250px);
-    padding: 10px 14px;
-    transition: var(--tran-05);
-}
-
-nav.close ~ .dashboard {
-    left: 73px;
-    width: calc(100% - 73px);
-    
-}
-
-.dashboard .top {
-    position: fixed;
-    top: 0;
-    left: 250px;
+    background-color: #f8f9fa;
+    padding: 15px;
     display: flex;
-    width: calc(100% - 250px);
-    justify-content: space-between;
+    flex-direction: column;
+}
+
+    .navbar-custom .nav-item {
+        margin-bottom: 20px;
+    }
+
+    .navbar-custom .nav-link {
+        display: flex;
+        align-items: center;
+        color: #007bff;
+        font-weight: 500;
+    }
+
+        .navbar-custom .nav-link i {
+            font-size: 20px;
+            margin-right: 10px;
+        }
+
+        .navbar-custom .nav-link:hover {
+            text-decoration: none;
+            color: #0056b3;
+        }
+
+.logo {
+    display: flex;
     align-items: center;
-    padding: 10px 14px;
-    background-color: var(--primary-color);
-    transition: var(--tran-05);
+    margin-bottom: 40px;
 }
 
-nav.close ~ .dashboard .top {
-    left: 73px;
-    width: calc(100% - 73px);
-    ;
+    .logo img {
+        height: 50px;
+        margin-right: 10px;
+    }
+
+.logo-name {
+    font-size: 24px;
+    font-weight: bold;
+    color: #007bff;
 }
 
-.dashboard .top .sidebar-toggle {
-    font-size: 26px;
-    color: var(--text-color);
+.mode-toggle {
     cursor: pointer;
+    margin-top: 10px;
+}
+
+/* General Body and Heading Styles */
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
 }
 
 .btn-allow {
@@ -376,9 +77,7 @@ nav.close ~ .dashboard .top {
 
 
 
-body {
-    direction: ltr;
-}
+
 
 
 /*Student Content*/

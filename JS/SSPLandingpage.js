@@ -1,11 +1,23 @@
 const body = document.querySelector("body"),
-      modeToggle = body.querySelector(".mode-toggle"),
-      sidebar = body.querySelector("nav"),
-      sidebarToggle = body.querySelector(".sidebar-toggle");
+    modeToggle = body.querySelector(".mode-toggle"),
+    sidebar = body.querySelector("nav"),
+    sidebarToggle = body.querySelector(".sidebar-toggle"),
+    mainContent = document.querySelector("main");
 
+// Toggle Dark Mode
 modeToggle.addEventListener("click", () => {
-    body.classList.toggle("dark");
+    body.classList.toggle("dark-mode"); // Changed to 'dark-mode' for specificity
 });
+
+// Toggle Sidebar Visibility
+sidebarToggle.addEventListener("click", () => {
+    sidebar.classList.toggle("d-none"); // Use Bootstrap's 'd-none' class for hiding the sidebar
+    mainContent.classList.toggle("flex-grow-1"); // Adjust content layout dynamically
+});
+
+// Add smooth transition effects
+sidebar.style.transition = "all 0.3s ease";
+mainContent.style.transition = "all 0.3s ease";
 
 sidebarToggle.addEventListener("click", () => {
     sidebar.classList.toggle("close");
@@ -339,7 +351,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const adminContent = document.getElementById('adminContent');
 
     // Define navigation menu items
-    const navLinks = document.querySelector('.nav-links');
+    const navLinks = document.querySelector('.navbar-custom .nav.flex-column');
 
     // Clear existing links
     navLinks.innerHTML = '';
@@ -351,69 +363,57 @@ document.addEventListener('DOMContentLoaded', () => {
         rootContent.style.display = 'block';
 
         navLinks.innerHTML = `  
-        <li>
-        <a href="../HTML/SSPLandingpage.html">
+        <li class="nav-item">
+        <a class="nav-link" href="../HTML/SSPLandingpage.html">
             <i class='bx bx-home'></i>
-            <span class="link-name">Dashboard</span>
+              Dashboard
         </a>
     </li>
-    <li>
-        <a href="../HTMLRoot/SSPRootCatalogPage.html">
+    <li class="nav-item">
+        <a class="nav-link" href="../HTMLRoot/SSPRootCatalogPage.html">
             <i class='bx bx-file'></i>
-            <span class="link-name">Catalog</span>
+            Catalog
         </a>
     </li>
-    <li>
-        <a href="../HTMLRoot/SSPRootCourseSectionsPage.html">
+    <li class="nav-item">
+        <a class="nav-link" href="../HTMLRoot/SSPRootCourseSectionsPage.html">
             <i class='bx bx-cog'></i>
-            <span class="link-name">Course Sections</span>
+            Course Sections
         </a>
-    </li>
-</ul>
-
-
     </li> `;
 
 
     } else if (role === 'STUDENT') {
         studentContent.style.display = 'block';
         navLinks.innerHTML = `  
-        <li>
-        <a href="../HTML/SSPLandingpage.html">
+        <li class="nav-item">
+        <a class="nav-link" href="../HTML/SSPLandingpage.html">
             <i class='bx bx-home'></i>
-            <span class="link-name">HomePage</span>
+            HomePage
         </a>
     </li>
-    <li>
-        <a href="#">
+    <li class="nav-item">
+        <a class="nav-link" href="#">
             <i class='bx bx-file'></i>
-            <span class="link-name">Saved Schedules</span>
+           Saved Schedules
         </a>
-    </li>
-   
-</ul>
-
-
+ 
     </li> `;
 
     } else if (role === 'ADMIN') {
         adminContent.style.display = 'block';
         navLinks.innerHTML = `  
-        <li>
-        <a href="../HTML/SSPLandingpage.html">
+        <li class="nav-item">
+        <a class="nav-link" href="../HTML/SSPLandingpage.html">
             <i class='bx bx-home'></i>
-            <span class="link-name">Course Sections</span>
+            Course Sections
         </a>
     </li>
-    <li>
-        <a href="../HTMLAdmin/SSPAdminCatalogPage.html">
+    <li class="nav-item">
+        <a class="nav-link" href="../HTMLAdmin/SSPAdminCatalogPage.html">
             <i class='bx bx-file'></i>
-            <span class="link-name">Catalog</span>
+            Catalog
         </a>
-    </li>
-   
-</ul>
-
 
     </li> `;
     } else {

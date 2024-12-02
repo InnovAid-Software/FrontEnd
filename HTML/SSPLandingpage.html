@@ -27,50 +27,49 @@
 
 <body>
     
-        <nav>
+    <div class="d-flex">
+        <!-- Sidebar -->
+        <nav class="navbar-custom">
+            <!-- Logo Section -->
             <div class="logo">
-                <div class="logo-image">
-                    <img src="../Assests/logo.png" alt="logo">
-                </div>
+                <img src="../Assests/logo.png" alt="logo">
                 <span class="logo-name">InovAid</span>
             </div>
 
-            <div class="menu-items">
-                <ul class="nav-links">
-                   
+            <!-- Navigation Links -->
+            <ul class="nav flex-column">
+            <!--links added dynamically!-->
+            </ul>
 
-                </ul>
-
-                <ul class="logout-mod">
-                    <li>
-                        <a href="#">
-                            <i class='bx bx-log-out'></i>
-                            <span class="link-name">Logout</span>
-                        </a>
-                    </li>
-
-                    <li class="mode">
-                        <a href="#">
-                            <i class='bx bx-moon'></i>
-                            <span class="link-name">Dark Mode</span>
-                        </a>
-
-                        <div class="mode-toggle">
-                            <span class="switch"></span>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+            <!-- Logout and Dark Mode -->
+            <ul class="nav flex-column mt-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class='bx bx-log-out'></i>
+                        Logout
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <div class="nav-link mode-toggle">
+                        <i class='bx bx-moon'></i>
+                        Dark Mode
+                    </div>
+                </li>
+            </ul>
         </nav>
 
-        <section class="dashboard">
-            <div class="top">
-                <i class='bx bxs-arrow-from-left sidebar-toggle'></i>
+        <!-- Main Content -->
+        <main class="flex-grow-1 p-3">
+            <section class="dashboard">
+                <div class="top mb-4">
+                    <i class='bx bxs-arrow-from-left sidebar-toggle'></i>
+                </div>
+            </section>
+            </main>
 
-            </div>
-        </section>
+
             <!--Added specific to root user-->
-            <div id="rootContent" >
+            <div id="rootContent" style="display: none;">
 
                 <div class="container d-flex align-items-center justify-content-center full-height">
                     <div class="row justify-content-center">
@@ -92,11 +91,11 @@
                         </div>
                     </div>
                 </div>
-       
 
-       </div>
 
-    
+            </div>
+
+
 
             <div id="studentContent" style="display: none;">
                 <!-- Student-specific content goes here -->
@@ -197,13 +196,14 @@
                     </div>
 
                 </div>
+                </div>
 
 
 
 
+                <div id="adminContent" >
 
-                <div id="adminContent" style="display: none;">
-                
+                   
                         <div class="container mt-5">
                             <h2>Course/Section Schedule</h2>
 
@@ -238,19 +238,17 @@
                             <!-- Hidden Input for CSV Upload -->
                             <input type="file" id="csv-file-input" style="display: none;" accept=".csv" onchange="handleCSVUpload(event)">
                         </div>
-                        <!-- Additional Admin features and information -->
+                      
                 </div>
-
-            </div>
-
+                
 
 
-                <script src="../JS/SSPLandingpage.js"></script>
+            <script src="../JS/SSPLandingpage.js"></script>
 
 
-                <!-- Bootstrap 4.5.2 JS (include before the closing body tag) -->
-                <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+            <!-- Bootstrap 4.5.2 JS (include before the closing body tag) -->
+            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
