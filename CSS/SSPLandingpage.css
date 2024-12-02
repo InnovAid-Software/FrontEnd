@@ -1,7 +1,7 @@
 
 
 
- #studentContent, #rootContent{
+ #studentContent, #rootContent, #adminContent{
     display: none; /* Hide by default rootContent */
 }
 /* Navbar Custom Styles */

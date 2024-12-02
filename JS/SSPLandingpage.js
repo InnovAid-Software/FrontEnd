@@ -377,7 +377,7 @@ document.addEventListener('DOMContentLoaded', () => {
     </li>
     <li class="nav-item">
         <a class="nav-link" href="../HTMLRoot/SSPRootCourseSectionsPage.html">
-            <i class='bx bx-cog'></i>
+            <i class='bx bx-file'></i>
             Course Sections
         </a>
     </li> `;
