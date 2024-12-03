@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /**
- * Reuse the same function to create and display schedules.
+ * Reuses the same function to create and display schedules.
  * @param {Array} schedule - Schedule data.
  * @param {number} scheduleIndex - Schedule index (e.g., 1, 2, etc.).
  * @param {HTMLElement} container - Container to append the table.
