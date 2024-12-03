@@ -149,8 +149,10 @@ document.addEventListener('DOMContentLoaded', fetchCourses);
 function generateSchedules() {
     const proposedCoursesBody = document.getElementById('proposedCoursesBody');
     const reservedTimesBody = document.getElementById('reservedTimesBody');
+    const schedulesContainer = document.getElementById('schedulesContainer'); // Parent container for schedules
+    schedulesContainer.innerHTML = ''; // Clear any previous schedules
 
-    // Collect data from the "Courses Selected" table
+    // Collect data from "Courses Selected" table
     const selectedCourses = [];
     proposedCoursesBody.querySelectorAll('tr').forEach(row => {
         const courseCell = row.querySelector('td:first-child');
@@ -159,7 +161,7 @@ function generateSchedules() {
         }
     });
 
-    // Collect data from the "Reserved Times" table
+    // Collect data from "Reserved Times" table
     const reservedTimes = [];
     reservedTimesBody.querySelectorAll('tr').forEach(row => {
         const startTimeInput = row.querySelector('td:nth-child(1) input');
@@ -171,31 +173,17 @@ function generateSchedules() {
             const endTime = endTimeInput.value.trim();
             const description = descriptionInput.value.trim();
 
-            // Ensure all fields are filled
             if (startTime && endTime && description) {
                 reservedTimes.push({ startTime, endTime, description });
             }
         }
     });
 
-    // Combine the collected data into a single payload
     const payload = {
         courses: selectedCourses,
         reservedTimes: reservedTimes,
     };
 
-    // Validate the payload before sending
-    if (!payload.courses.length) {
-        alert("Please select at least one course.");
-        return;
-    }
-
-    if (!payload.reservedTimes.length) {
-        alert("Please add at least one reserved time.");
-        return;
-    }
-
-    // Send the data to the backend
     axios.post('https://innovaid.dev/api/schedule/generate', payload, {
         headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -203,16 +191,93 @@ function generateSchedules() {
         },
     })
         .then(response => {
-            console.log('Schedule generated successfully:', response.data);
-            alert('Schedule generated successfully!');
+            const schedules = response.data.schedules; // Assume `schedules` is an array of arrays
+            schedules.forEach((schedule, index) => {
+                createScheduleTable(schedule, index + 1, schedulesContainer);
+            });
         })
         .catch(error => {
-            console.error('Error generating schedule:', error);
-            alert('Failed to generate schedule. Please try again.');
+            console.error('Error generating schedules:', error);
+            alert('Failed to generate schedules. Please try again.');
         });
 }
 
+/**
+* Function to create a schedule table.
+* @param {Array} schedule - Array of schedule rows.
+* @param {number} scheduleIndex - Schedule index (e.g., 1, 2, etc.).
+* @param {HTMLElement} container - Container to append the table.
+*/
+function createScheduleTable(schedule, scheduleIndex, container) {
+    // Create table wrapper
+    const scheduleWrapper = document.createElement('div');
+    scheduleWrapper.className = 'schedule-wrapper mb-4';
 
+    // Create table element
+    const table = document.createElement('table');
+    table.className = 'table table-bordered text-center';
+
+    // Create table caption
+    const caption = document.createElement('caption');
+    caption.textContent = `Schedule ${scheduleIndex}`;
+    caption.className = 'font-weight-bold mb-2';
+    table.appendChild(caption);
+
+    // Create table header
+    const thead = document.createElement('thead');
+    const headerRow = document.createElement('tr');
+    const headers = ['Section', 'Dep. ID', 'Course', 'Instructor', 'Day', 'StartTime', 'EndTime'];
+
+    headers.forEach(header => {
+        const th = document.createElement('th');
+        th.textContent = header;
+        headerRow.appendChild(th);
+    });
+    thead.appendChild(headerRow);
+    table.appendChild(thead);
+
+    // Create table body
+    const tbody = document.createElement('tbody');
+    schedule.forEach(row => {
+        const tr = document.createElement('tr');
+        row.forEach(cell => {
+            const td = document.createElement('td');
+            td.textContent = cell;
+            tr.appendChild(td);
+        });
+        tbody.appendChild(tr);
+    });
+    table.appendChild(tbody);
+
+    // Create Save button
+    const saveButton = document.createElement('button');
+    saveButton.type = 'button';
+    saveButton.className = 'btn btn-success mt-2';
+    saveButton.textContent = 'Save Schedule';
+    saveButton.addEventListener('click', () => {
+        saveSchedule(schedule);
+    });
+
+    // Append table and button to the wrapper
+    scheduleWrapper.appendChild(table);
+    scheduleWrapper.appendChild(saveButton);
+
+    // Append the wrapper to the container
+    container.appendChild(scheduleWrapper);
+}
+
+function saveSchedule(schedule) {
+    // Get existing saved schedules from localStorage
+    const savedSchedules = JSON.parse(localStorage.getItem('savedSchedules')) || [];
+
+    // Add the current schedule to the saved schedules
+    savedSchedules.push(schedule);
+
+    // Update localStorage
+    localStorage.setItem('savedSchedules', JSON.stringify(savedSchedules));
+
+    alert('Schedule saved successfully! It will appear on your SavedSchedules page.');
+}
 
 
 
