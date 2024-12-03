@@ -57,6 +57,98 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+// Fetch available courses from the backend and populate the table
+const fetchCourses = async () => {
+    try {
+        const response = await axios.get('https://innovaid.dev/api/schedule', {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+            }
+        });
+
+        const courses = response.data;
+        const tableBody = document.getElementById('availableCoursesBody');
+        tableBody.innerHTML = ''; // Clear existing rows
+
+        // Iterate over the courses and create rows
+        courses.forEach(course => {
+            const row = document.createElement('tr');
+
+            // Course column
+            const courseCell = document.createElement('td');
+            courseCell.textContent = course.courseTitle;
+            row.appendChild(courseCell);
+
+            // Add icon column
+            const addCell = document.createElement('td');
+            const addIcon = document.createElement('i');
+            addIcon.className = 'fas fa-plus-circle text-success'; // Font Awesome icon
+            addIcon.style.cursor = 'pointer';
+
+            // Add click event to icon
+            addIcon.addEventListener('click', () => {
+                addCourse(course.courseTitle);
+            });
+
+            addCell.appendChild(addIcon);
+            row.appendChild(addCell);
+
+            // Append row to table body
+            tableBody.appendChild(row);
+        });
+    } catch (error) {
+        console.error("Error fetching data:", error);
+    }
+};
+
+// Handle adding a course
+const addCourse = (courseTitle) => {
+    const proposedCoursesBody = document.getElementById('proposedCoursesBody');
+
+    // Create a new row for the selected course
+    const row = document.createElement('tr');
+
+    // Course column
+    const courseCell = document.createElement('td');
+    courseCell.textContent = courseTitle;
+    row.appendChild(courseCell);
+
+    // Trash icon column (for removal)
+    const trashCell = document.createElement('td');
+
+    // Create the button element for trash icon
+    const removeButton = document.createElement('button');
+    removeButton.type = 'button';
+    removeButton.className = 'btn btn-link p-0 text-danger remove-button';
+    removeButton.placeholder = 'Description';
+
+    // Create the trash icon inside the button
+    const trashIcon = document.createElement('i');
+    trashIcon.className = 'bi bi-trash'; // Bootstrap Icons trash icon
+    removeButton.appendChild(trashIcon);
+
+    // Add click event to remove the course
+    removeButton.addEventListener('click', () => {
+        row.remove(); // Remove the row from the table
+        console.log(`Removed course: ${courseTitle}`);
+        // Optionally send a request to the backend to remove the course from the user's selection
+    });
+
+    trashCell.appendChild(removeButton);
+    row.appendChild(trashCell);
+
+    // Append row to the Proposed Courses table
+    proposedCoursesBody.appendChild(row);
+};
+
+
+// Fetch courses on page load
+document.addEventListener('DOMContentLoaded', fetchCourses);
+
+
+
+
+
 //Admin user
 //admin js
 // Array to hold the section data locally
