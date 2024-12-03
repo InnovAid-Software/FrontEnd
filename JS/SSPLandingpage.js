@@ -146,6 +146,73 @@ const addCourse = (courseTitle) => {
 document.addEventListener('DOMContentLoaded', fetchCourses);
 
 
+function generateSchedules() {
+    const proposedCoursesBody = document.getElementById('proposedCoursesBody');
+    const reservedTimesBody = document.getElementById('reservedTimesBody');
+
+    // Collect data from the "Courses Selected" table
+    const selectedCourses = [];
+    proposedCoursesBody.querySelectorAll('tr').forEach(row => {
+        const courseCell = row.querySelector('td:first-child');
+        if (courseCell) {
+            selectedCourses.push(courseCell.textContent.trim());
+        }
+    });
+
+    // Collect data from the "Reserved Times" table
+    const reservedTimes = [];
+    reservedTimesBody.querySelectorAll('tr').forEach(row => {
+        const startTimeInput = row.querySelector('td:nth-child(1) input');
+        const endTimeInput = row.querySelector('td:nth-child(2) input');
+        const descriptionInput = row.querySelector('td:nth-child(3) input');
+
+        if (startTimeInput && endTimeInput && descriptionInput) {
+            const startTime = startTimeInput.value.trim();
+            const endTime = endTimeInput.value.trim();
+            const description = descriptionInput.value.trim();
+
+            // Ensure all fields are filled
+            if (startTime && endTime && description) {
+                reservedTimes.push({ startTime, endTime, description });
+            }
+        }
+    });
+
+    // Combine the collected data into a single payload
+    const payload = {
+        courses: selectedCourses,
+        reservedTimes: reservedTimes,
+    };
+
+    // Validate the payload before sending
+    if (!payload.courses.length) {
+        alert("Please select at least one course.");
+        return;
+    }
+
+    if (!payload.reservedTimes.length) {
+        alert("Please add at least one reserved time.");
+        return;
+    }
+
+    // Send the data to the backend
+    axios.post('https://innovaid.dev/api/schedule/generate', payload, {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            'Content-Type': 'application/json',
+        },
+    })
+        .then(response => {
+            console.log('Schedule generated successfully:', response.data);
+            alert('Schedule generated successfully!');
+        })
+        .catch(error => {
+            console.error('Error generating schedule:', error);
+            alert('Failed to generate schedule. Please try again.');
+        });
+}
+
+
 
 
 
