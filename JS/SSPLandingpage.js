@@ -552,7 +552,7 @@ document.addEventListener('DOMContentLoaded', () => {
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="../HTMLStudent/SSPStudentSavedSchedulesPage.html">
             <i class='bx bx-file'></i>
            Saved Schedules
         </a>
