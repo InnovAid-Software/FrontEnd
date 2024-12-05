@@ -57,3 +57,10 @@
     .btn-success:hover {
         background-color: #4cae4c;
     }
+/* Make the Instructor column auto-expand based on content */
+.table th:nth-child(5),
+.table td:nth-child(5) {
+  width: auto;
+  max-width: 250px; /* Optional: Set a max-width to prevent it from getting too wide */
+  word-wrap: break-word; /* Allow wrapping when necessary */
+}
