@@ -199,12 +199,12 @@ body {
     }
 
 #adminContent .btn-secondary {
-    background-color: #5bc0de;
+    background-color: #6c757d;
     color: white;
 }
 
     #adminContent .btn-secondary:hover {
-        background-color: #31b0d5;
+        background-color: #5b6369;
     }
 
 #adminContent .btn-success {
