@@ -74,7 +74,23 @@ body {
     border: none;
 }
 
+/* Root Content Table Styles */
+#rootContent .table {
+    background-color: #ffd699; /* Light yellow background */
+    border: 1px solid #294868; /* Dark blue border */
+}
 
+#rootContent .table th {
+    background-color: #294868; /* Dark blue header background */
+    color: white; /* White text color */
+    font-weight: bold; /* Bold font for header */
+    text-align: center; /* Center align header text */
+}
+
+#rootContent .table td {
+    vertical-align: middle; /* Center vertical alignment */
+    text-align: center; /* Center text alignment */
+}
 
 
 
@@ -199,12 +215,12 @@ body {
     }
 
 #adminContent .btn-secondary {
-    background-color: #5bc0de;
+    background-color: #6c757d;
     color: white;
 }
 
     #adminContent .btn-secondary:hover {
-        background-color: #31b0d5;
+        background-color: #5b6369;
     }
 
 #adminContent .btn-success {
