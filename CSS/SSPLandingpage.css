@@ -173,7 +173,7 @@ body {
 
 
 
-#adminContent h2 {
+#adminContent  h2 {
     font-weight: bold;
     color: #294868;
     text-align: center;
@@ -215,12 +215,12 @@ body {
     }
 
 #adminContent .btn-secondary {
-    background-color: #6c757d;
+    background-color: #5bc0de;
     color: white;
 }
 
-    #adminContent .btn-secondary:hover {
-        background-color: #5b6369;
+   #adminContent .btn-secondary:hover {
+        background-color: #31b0d5;
     }
 
 #adminContent .btn-success {
@@ -229,6 +229,13 @@ body {
 }
 
 
- #adminContent .btn-success:hover {
+    #adminContent .btn-success:hover {
         background-color: #4cae4c;
     }
+/* Make the Instructor column auto-expand based on content */
+#adminContent .table th:nth-child(5),
+#adminContent .table td:nth-child(5) {
+    width: auto;
+    max-width: 250px; /* Optional: Set a max-width to prevent it from getting too wide */
+    word-wrap: break-word; /* Allow wrapping when necessary */
+}
