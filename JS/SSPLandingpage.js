@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // Fetch available courses from the backend and populate the table
 const fetchCourses = async () => {
     try {
-        const response = await axios.get('https://innovaid.dev/api/schedule', {
+        const response = await axios.get('https://innovaid.dev/api/catalog/courses', {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
             }
@@ -149,39 +149,39 @@ document.addEventListener('DOMContentLoaded', fetchCourses);
 function generateSchedules() {
     const proposedCoursesBody = document.getElementById('proposedCoursesBody');
     const reservedTimesBody = document.getElementById('reservedTimesBody');
-    const schedulesContainer = document.getElementById('schedulesContainer'); // Parent container for schedules
-    schedulesContainer.innerHTML = ''; // Clear any previous schedules
+    const schedulesContainer = document.getElementById('schedulesContainer');
+    schedulesContainer.innerHTML = '';
 
-    // Collect data from "Courses Selected" table
+    // Collect courses data with proper structure
     const selectedCourses = [];
     proposedCoursesBody.querySelectorAll('tr').forEach(row => {
-        const courseCell = row.querySelector('td:first-child');
-        if (courseCell) {
-            selectedCourses.push(courseCell.textContent.trim());
-        }
+        const courseText = row.querySelector('td:first-child').textContent.trim();
+        const [department_id, course_number] = courseText.split(' ');
+        selectedCourses.push({
+            department_id,
+            course_number
+        });
     });
 
-    // Collect data from "Reserved Times" table
-    const reservedTimes = [];
+    // Collect reserved times with proper structure
+    const reserved = [];
     reservedTimesBody.querySelectorAll('tr').forEach(row => {
         const startTimeInput = row.querySelector('td:nth-child(1) input');
         const endTimeInput = row.querySelector('td:nth-child(2) input');
-        const descriptionInput = row.querySelector('td:nth-child(3) input');
+        const daysInput = row.querySelector('td:nth-child(3) input');
 
-        if (startTimeInput && endTimeInput && descriptionInput) {
-            const startTime = startTimeInput.value.trim();
-            const endTime = endTimeInput.value.trim();
-            const description = descriptionInput.value.trim();
-
-            if (startTime && endTime && description) {
-                reservedTimes.push({ startTime, endTime, description });
-            }
+        if (startTimeInput && endTimeInput && daysInput) {
+            reserved.push({
+                days: daysInput.value.split(''),  // Convert string to array of chars
+                start_time: startTimeInput.value,
+                end_time: endTimeInput.value
+            });
         }
     });
 
     const payload = {
         courses: selectedCourses,
-        reservedTimes: reservedTimes,
+        reserved: reserved
     };
 
     axios.post('https://innovaid.dev/api/schedule/generate', payload, {
@@ -190,16 +190,16 @@ function generateSchedules() {
             'Content-Type': 'application/json',
         },
     })
-        .then(response => {
-            const schedules = response.data.schedules; // Assume `schedules` is an array of arrays
-            schedules.forEach((schedule, index) => {
-                createScheduleTable(schedule, index + 1, schedulesContainer);
-            });
-        })
-        .catch(error => {
-            console.error('Error generating schedules:', error);
-            alert('Failed to generate schedules. Please try again.');
+    .then(response => {
+        // response.data is already the array of schedules
+        response.data.forEach((schedule, index) => {
+            createScheduleTable(schedule.sections, index + 1, schedulesContainer);
         });
+    })
+    .catch(error => {
+        console.error('Error generating schedules:', error);
+        alert('Failed to generate schedules. Please try again.');
+    });
 }
 
 /**
@@ -472,7 +472,7 @@ function saveSections() {
         updatedSections.push(section);
     });
 
-    axios.post('https://innovaid.dev/api/schedule', updatedSections, {
+    axios.post('https://innovaid.dev/api/catalog/courses/sections', updatedSections, {
         headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -579,22 +579,41 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-//fetch admin/root data from the backend
-
-axios.get('https://innovaid.dev/api/queue', {
-    headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`
-        
+// Only fetch queue data if user is ROOT or ADMIN
+function fetchQueueData() {
+    const role = localStorage.getItem('role');
+    if (role !== 'ROOT' && role !== 'ADMIN') {
+        console.log('Unauthorized: Queue data is only available for ADMIN/ROOT users');
+        return;
     }
-})
 
+    axios.get('https://innovaid.dev/api/queue', {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+    })
     .then(response => {
         const queueData = response.data;
         console.log("Queue Data:", queueData);
-        populateTable(queueData);  // Call function to populate the table with retrieved data
+        populateTable(queueData);
     })
-    .catch(error => console.error("Error fetching data:", error));
-   
+    .catch(error => {
+        if (error.response?.status === 403) {
+            console.error("Access forbidden - Please check if you have admin/root privileges");
+        } else {
+            console.error("Error fetching queue data:", error);
+        }
+    });
+}
+
+// Call this function when the page loads, but only if user has appropriate role
+document.addEventListener('DOMContentLoaded', () => {
+    const role = localStorage.getItem('role');
+    if (role === 'ROOT' || role === 'ADMIN') {
+        fetchQueueData();
+    }
+});
+
 //function to populate the table
 function populateTable(data) {
     const tableBody = document.getElementById('userTableBody');
@@ -661,5 +680,34 @@ function allowUser(email) {
 
 function denyUser(email) {
     handleDecision(email, false);
+}
+
+// In SSPAdminCatalogJS.js
+function saveCourses() {
+    const catalogAdmin = courses.map(course => ({
+        departmentId: course.departmentId,
+        courseNumber: course.courseNumber,
+        courseTitle: course.courseTitle,
+    }));
+
+    if (catalogAdmin.length === 0) {  // Fixed: using catalogAdmin instead of payload
+        alert("No courses to save.");
+        return;
+    }
+
+    axios.post("https://innovaid.dev/api/catalog/courses", catalogAdmin, {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            'Content-Type': 'application/json'
+        },
+    })
+    .then(response => {
+        console.log("Catalog Courses saved successfully:", response.data);
+        alert("Courses saved successfully!");
+    })
+    .catch(error => {
+        console.error("Error saving catalog courses:", error.response?.data || error.message);
+        alert("An error occurred while saving the catalog courses.");
+    });
 }
 

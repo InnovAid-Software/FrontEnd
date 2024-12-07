@@ -98,35 +98,29 @@ renderCourses();
 
 // Function to save courses to the backend
 function saveCourses() {
-    // Prepare the payload with organized data
-    const catalogRoot = courses.map(course => ({
+    const catalogData = courses.map(course => ({
         departmentId: course.departmentId,
         courseNumber: course.courseNumber,
         courseTitle: course.courseTitle,
     }));
 
-    // Check if the payload is empty
-    if (payload.length === 0) {
+    if (catalogData.length === 0) {
         alert("No courses to save.");
         return;
     }
 
-    // Use Axios to send the payload to the backend
-    axios.post("https://innovaid.dev/api/schedule", catalogRoot, {
+    axios.post("https://innovaid.dev/api/schedule", catalogData, {
         headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`, // Replace with your token logic
-
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            'Content-Type': 'application/json',
         },
     })
-        .then(function (response) {
-            // Handle successful response
-            console.log("Catalog Courses saved successfully:", response.data);
-            alert("Courses saved successfully!");
-        })
-        .catch(function (error) {
-            // Handle errors
-            console.error("Error saving catalog courses:", error.response?.data || error.message);
-            alert("An error occurred while saving the catalog courses.");
-        });
-
+    .then(response => {
+        console.log("Catalog Courses saved successfully:", response.data);
+        alert("Courses saved successfully!");
+    })
+    .catch(error => {
+        console.error("Error saving catalog courses:", error.response?.data || error.message);
+        alert("An error occurred while saving the catalog courses.");
+    });
 }
