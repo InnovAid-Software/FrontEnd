@@ -163,8 +163,6 @@ document.addEventListener('DOMContentLoaded', fetchCourses);
 function generateSchedules() {
     const proposedCoursesBody = document.getElementById('proposedCoursesBody');
     const reservedTimesBody = document.getElementById('reservedTimesBody');
-    const schedulesContainer = document.getElementById('schedulesContainer');
-    schedulesContainer.innerHTML = '';
 
     // Collect courses data with proper structure
     const selectedCourses = [];
@@ -209,37 +207,33 @@ function generateSchedules() {
             },
         })
         .then(response => {
-            const allSchedules = [];
-
-            response.data.forEach((schedule, index) => {
-                const sections = schedule.sections.map(section => [
-                    section.section_id,
-                    section.department_id,
-                    section.course_number,
-                    section.instructor,
-                    section.days.join(''),
-                    section.start_time,
-                    section.end_time,
-                ]);
-                createScheduleTable(sections, index + 1, schedulesContainer);
-
-                // Collect this schedule's data
-                allSchedules.push({
+            const allSchedules = response.data.map((schedule, index) => {
+                const sections = schedule.sections.map(section => ({
+                    section_id: section.section_id,
+                    department_id: section.department_id,
+                    course_number: section.course_number,
+                    instructor: section.instructor,
+                    days: section.days.join(''),
+                    start_time: section.start_time,
+                    end_time: section.end_time,
+                }));
+                return {
                     scheduleIndex: index + 1,
                     sections: sections,
-                });
+                };
             });
 
             // Save all schedules to localStorage
             localStorage.setItem('generatedSchedules', JSON.stringify(allSchedules));
 
-           
+            
         })
         .catch(error => {
             console.error('Error generating schedules:', error);
             alert('Failed to generate schedules. Please try again.');
         });
 }
+
 
 
 /**
