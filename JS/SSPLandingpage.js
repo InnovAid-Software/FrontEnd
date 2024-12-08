@@ -582,14 +582,22 @@ document.addEventListener('DOMContentLoaded', () => {
 // Only fetch queue data if user is ROOT or ADMIN
 function fetchQueueData() {
     const role = localStorage.getItem('role');
+    const token = localStorage.getItem('token');
+
     if (role !== 'ROOT' && role !== 'ADMIN') {
         console.log('Unauthorized: Queue data is only available for ADMIN/ROOT users');
         return;
     }
 
+    if (!token) {
+        console.error('No authentication token found');
+        return;
+    }
+
     axios.get('https://innovaid.dev/api/queue', {
         headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
         }
     })
     .then(response => {
@@ -598,7 +606,11 @@ function fetchQueueData() {
         populateTable(queueData);
     })
     .catch(error => {
-        if (error.response?.status === 403) {
+        if (error.response?.status === 401) {
+            console.error("Authentication failed - Invalid or expired token");
+            // Optionally redirect to login page
+            window.location.href = '../HTML/SSPLoginPage.html';
+        } else if (error.response?.status === 403) {
             console.error("Access forbidden - Please check if you have admin/root privileges");
         } else {
             console.error("Error fetching queue data:", error);
