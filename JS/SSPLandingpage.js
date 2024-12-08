@@ -226,7 +226,8 @@ function generateSchedules() {
             // Save all schedules to localStorage
             localStorage.setItem('generatedSchedules', JSON.stringify(allSchedules));
 
-            
+            // Redirect to the schedules page
+            window.location.href = '..HTMLStudent/generatedSchedules.html';
         })
         .catch(error => {
             console.error('Error generating schedules:', error);
