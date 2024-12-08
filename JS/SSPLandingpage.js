@@ -238,10 +238,6 @@ function generateSchedules() {
 
 
 /**
-* Function to create a schedule table.
-* @param {Array} schedule - Array of schedule rows.
-* @param {number} scheduleIndex - Schedule index (e.g., 1, 2, etc.).
-* @param {HTMLElement} container - Container to append the table.
 
 function createScheduleTable(schedule, scheduleIndex, container) {
     // Create table wrapper
