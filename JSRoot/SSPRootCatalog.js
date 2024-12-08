@@ -171,7 +171,7 @@ function saveCourses() {
         return;
     }
 
-    axios.post("https://innovaid.dev/api/schedule", catalogData, {
+    axios.post("https://innovaid.dev/api/catalog/courses", catalogData, {
         headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
             'Content-Type': 'application/json',
