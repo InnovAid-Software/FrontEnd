@@ -242,37 +242,3 @@ body {
 }
 
 
-/* Set fixed height and enable scrolling for the table bodies */
-#ProposedCoursesTable tbody,
-#CoursesAvailableTable tbody,
-#ReservedTimesTable tbody {
-    height: 200px; /* Adjust height as needed */
-    overflow-y: auto; /* Enable vertical scrolling */
-    display: block; /* Make tbody block-level to allow scrolling */
-}
-
-/* Optional: Adjust the headers to remain fixed at the top */
-#ProposedCoursesTable thead,
-#CoursesAvailableTable thead,
-#ReservedTimesTable thead {
-    display: table;
-    width: 100%;
-    table-layout: fixed; /* Ensures headers align with table body */
-}
-
-/* Set table styles to ensure no movement or resizing when rows are added */
-.table {
-    width: 100%;
-    table-layout: fixed; /* Prevent resizing of columns */
-}
-
-/* Optional: Ensure tables have consistent height even if content is less than the defined height */
-.table-bordered {
-    border-collapse: collapse;
-    width: 100%;
-}
-
-.table td, .table th {
-    padding: 8px; /* Adjust padding as needed */
-    word-wrap: break-word;
-}

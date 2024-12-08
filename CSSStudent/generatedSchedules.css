@@ -1,1 +1,13 @@
-﻿
+﻿/* Make the body and html fill the entire viewport height */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+/* Make the container scrollable */
+#schedulesContainer {
+    height: calc(100vh - 60px); /* Adjust this value depending on the header height */
+    overflow-y: auto; /* Enable vertical scrolling */
+    padding: 10px; /* Optional: add padding for spacing */
+    box-sizing: border-box; /* Ensures padding doesn't affect height */
+}
