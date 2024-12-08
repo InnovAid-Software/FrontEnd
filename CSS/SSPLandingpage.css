@@ -121,25 +121,27 @@ body {
 }
 
 /*Student Content*/
-.table-bordered {
+#studentContent .table-bordered {  //check
     border-collapse: collapse; /* Can mess with spacing */
 }
 
 /*Student Content*/
 #ReservedTimesTable {
     margin-top: 150px; /* Adjust this value to your preference */
-    margin-left: -500px !important;
+    margin-left: -900px !important;
 }
 
 /*Student Content*/
-#ProposedCoursesTable {
-    margin-left: -150px;
+#ProposedCoursesTable {  /*-150px*/
+    margin-left: -290px;
+    margin-top: 230px;  /*come back didn't have this*/
 }
 
 
 /*Student Content*/
 #CoursesAvailableTable {
     margin-left: 280px;
+    margin-top:230px;
 }
 
 /*Student Content*/
