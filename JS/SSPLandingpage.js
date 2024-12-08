@@ -211,9 +211,19 @@ function generateSchedules() {
         },
     })
     .then(response => {
-        // response.data is already the array of schedules
+        // response.data is an array of schedule objects
         response.data.forEach((schedule, index) => {
-            createScheduleTable(schedule.sections, index + 1, schedulesContainer);
+            // Extract the sections array from each schedule object
+            const sections = schedule.sections.map(section => [
+                section.section_id,
+                section.department_id,
+                section.course_number,
+                section.instructor,
+                section.days.join(''),  // Join the days array into a string
+                section.start_time,
+                section.end_time
+            ]);
+            createScheduleTable(sections, index + 1, schedulesContainer);
         });
     })
     .catch(error => {
