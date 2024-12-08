@@ -121,7 +121,7 @@ body {
 }
 
 /*Student Content*/
-#studentContent .table-bordered {  //check
+#studentContent .table-bordered {  
     border-collapse: collapse; /* Can mess with spacing */
 }
 
