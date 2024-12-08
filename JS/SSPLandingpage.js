@@ -608,8 +608,6 @@ function fetchQueueData() {
     .catch(error => {
         if (error.response?.status === 401) {
             console.error("Authentication failed - Invalid or expired token");
-            // Optionally redirect to login page
-            window.location.href = '../HTML/SSPLoginPage.html';
         } else if (error.response?.status === 403) {
             console.error("Access forbidden - Please check if you have admin/root privileges");
         } else {
