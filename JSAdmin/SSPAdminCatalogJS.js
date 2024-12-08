@@ -70,55 +70,91 @@ function importCSV() {
 
 function handleCSVUpload(event) {
     const file = event.target.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-            const rows = e.target.result.split("\n");
-            rows.forEach((row) => {
-                const [departmentId, courseNumber, courseTitle] = row.split(",");
-                if (departmentId && courseNumber && courseTitle) {
-                    courses.push({
-                        departmentId: departmentId.trim(),
-                        courseNumber: courseNumber.trim(),
-                        courseTitle: courseTitle.trim()
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const rows = e.target.result.split("\n");
+        const coursesMap = new Map(); // To track unique courses
+        const sectionsData = [];
+
+        rows.forEach((row, index) => {
+            if (!row.trim()) return; // Skip empty rows
+
+            const columns = row.split(",").map(col => col.trim());
+            
+            // Check if we have enough columns for a section entry
+            if (columns.length >= 8) {
+                const [departmentId, courseNumber, courseTitle, sectionId, instructor, days, startTime, endTime] = columns;
+
+                // Add to courses map if not already present
+                const courseKey = `${departmentId}-${courseNumber}`;
+                if (!coursesMap.has(courseKey)) {
+                    coursesMap.set(courseKey, {
+                        departmentId,
+                        courseNumber,
+                        courseTitle
                     });
                 }
-            });
-            renderCourses();
-        };
-        reader.readAsText(file);
-    }
+
+                // Add to sections array
+                sectionsData.push({
+                    departmentId,
+                    courseNumber,
+                    courseTitle,
+                    sectionId,
+                    instructor,
+                    days,
+                    startTime,
+                    endTime
+                });
+            } else {
+                console.warn(`Row ${index + 1} has insufficient columns. Expected 8, got ${columns.length}`);
+            }
+        });
+
+        // Convert courses map to array
+        const coursesData = Array.from(coursesMap.values());
+
+        // Save courses to backend
+        saveCourseData(coursesData);
+
+        // Save sections to backend
+        saveSectionData(sectionsData);
+    };
+
+    reader.readAsText(file);
 }
 
-
-// Initial rendering of the table
-renderCourses();
-
-// Function to save courses to the backend
-function saveCourses() {
-    const catalogData = courses.map(course => ({
-        departmentId: course.departmentId,
-        courseNumber: course.courseNumber,
-        courseTitle: course.courseTitle,
-    }));
-
-    if (catalogData.length === 0) {
-        alert("No courses to save.");
-        return;
-    }
-
-    axios.post("https://innovaid.dev/api/catalog/courses", catalogData, {
+function saveCourseData(coursesData) {
+    axios.post("https://innovaid.dev/api/catalog/courses", coursesData, {
         headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
             'Content-Type': 'application/json',
         },
     })
     .then(response => {
-        console.log("Catalog Courses saved successfully:", response.data);
-        alert("Courses saved successfully!");
+        console.log("Courses saved successfully:", response.data);
     })
     .catch(error => {
-        console.error("Error saving catalog courses:", error.response?.data || error.message);
-        alert("An error occurred while saving the catalog courses.");
+        console.error("Error saving courses:", error.response?.data || error.message);
     });
 }
+
+function saveSectionData(sectionsData) {
+    axios.post("https://innovaid.dev/api/catalog/courses/sections", sectionsData, {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            'Content-Type': 'application/json',
+        },
+    })
+    .then(response => {
+        console.log("Sections saved successfully:", response.data);
+    })
+    .catch(error => {
+        console.error("Error saving sections:", error.response?.data || error.message);
+    });
+}
+
+// Initial rendering of the table
+renderCourses();
