@@ -220,15 +220,19 @@ function generateSchedules() {
                     section.instructor,
                     section.days.join(''),
                     section.start_time,
-                    section.end_time
-                ])
+                    section.end_time,
+                ]),
             }));
 
-            // Save all schedules to localStorage
-            localStorage.setItem('generatedSchedules', JSON.stringify(allSchedules));
+            if (allSchedules.length > 0) {
+                // Save all schedules to localStorage
+                localStorage.setItem('generatedSchedules', JSON.stringify(allSchedules));
 
-            // Redirect to the schedules page
-            window.location.href = '../HTMLStudent/generatedSchedules.html';
+                // Redirect to the schedules page
+                window.location.href = '../HTMLStudent/generatedSchedules.html';
+            } else {
+                alert('No valid schedules could be generated. Please adjust your selections and try again.');
+            }
         })
         .catch(error => {
             console.error('Error generating schedules:', error);
@@ -237,9 +241,8 @@ function generateSchedules() {
 }
 
 
-
 /**
-
+ * 
 function createScheduleTable(schedule, scheduleIndex, container) {
     // Create table wrapper
     const scheduleWrapper = document.createElement('div');
