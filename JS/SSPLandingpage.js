@@ -241,7 +241,7 @@ function generateSchedules() {
 * @param {Array} schedule - Array of schedule rows.
 * @param {number} scheduleIndex - Schedule index (e.g., 1, 2, etc.).
 * @param {HTMLElement} container - Container to append the table.
-*/
+
 function createScheduleTable(schedule, scheduleIndex, container) {
     // Create table wrapper
     const scheduleWrapper = document.createElement('div');
@@ -313,7 +313,7 @@ function saveSchedule(schedule) {
     alert('Schedule saved successfully! It will appear on your SavedSchedules page.');
 }
 
-
+**/
 
 //Admin user
 //admin js
