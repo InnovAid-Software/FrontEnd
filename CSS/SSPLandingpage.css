@@ -56,10 +56,10 @@
     margin-top: 10px;
 }
 
-/* General Body and Heading Styles */
-body {
-    font-family: Arial, sans-serif;
-    padding: 20px;
+/* Ensure the body and html take up the full height edit new */
+html, body {
+    height: 100%;
+    margin: 0;
 }
 
 .btn-allow {
@@ -169,6 +169,22 @@ body {
 #CoursesAvailableTable caption {
     color: black;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
