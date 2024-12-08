@@ -42,6 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const newRow = document.createElement("tr");
 
         newRow.innerHTML = `
+            <td><input type="text" class="form-control-sm" placeholder="Ex: M"></td>
             <td><input type="text" class="form-control-sm" placeholder="Ex: 0900"></td>
             <td><input type="text" class="form-control-sm" placeholder="Ex: 1200"></td>
             <td><input type="text" class="form-control-sm" placeholder="Lunch time"></td>
@@ -74,10 +75,20 @@ const fetchCourses = async () => {
         courses.forEach(course => {
             const row = document.createElement('tr');
 
-            // Course column
-            const courseCell = document.createElement('td');
-            courseCell.textContent = course.courseTitle;
-            row.appendChild(courseCell);
+            // Department ID column
+            const departmentIdCell = document.createElement('td');
+            departmentIdCell.textContent = course.departmentId;
+            row.appendChild(departmentIdCell);
+
+            // Course number column
+            const courseNumberCell = document.createElement('td');
+            courseNumberCell.textContent = course.courseNumber; //check for Names Backend
+            row.appendChild(courseNumberCell);
+
+            // Course title column
+            const courseTitleCell = document.createElement('td');
+            courseTitleCell.textContent = course.courseTitle;
+            row.appendChild(courseTitleCell);
 
             // Add icon column
             const addCell = document.createElement('td');
@@ -87,7 +98,11 @@ const fetchCourses = async () => {
 
             // Add click event to icon
             addIcon.addEventListener('click', () => {
-                addCourse(course.courseTitle);
+                addCourse({
+                    departmentId: course.departmentId,
+                    courseNumber: course.courseNumber,
+                    courseTitle: course.courseTitle,
+                });
             });
 
             addCell.appendChild(addIcon);
@@ -101,17 +116,28 @@ const fetchCourses = async () => {
     }
 };
 
+
 // Handle adding a course
-const addCourse = (courseTitle) => {
+const addCourse = ({ departmentId, courseNumber, courseTitle }) => {
     const proposedCoursesBody = document.getElementById('proposedCoursesBody');
 
     // Create a new row for the selected course
     const row = document.createElement('tr');
 
-    // Course column
-    const courseCell = document.createElement('td');
-    courseCell.textContent = courseTitle;
-    row.appendChild(courseCell);
+    // Department ID column
+    const departmentIdCell = document.createElement('td');
+    departmentIdCell.textContent = departmentId;
+    row.appendChild(departmentIdCell);
+
+    // Course Number column
+    const courseNumberCell = document.createElement('td');
+    courseNumberCell.textContent = courseNumber;
+    row.appendChild(courseNumberCell);
+
+    // Course Title column
+    const courseTitleCell = document.createElement('td');
+    courseTitleCell.textContent = courseTitle;
+    row.appendChild(courseTitleCell);
 
     // Trash icon column (for removal)
     const trashCell = document.createElement('td');
@@ -131,7 +157,7 @@ const addCourse = (courseTitle) => {
     removeButton.addEventListener('click', () => {
         row.remove(); // Remove the row from the table
         console.log(`Removed course: ${courseTitle}`);
-        // Optionally send a request to the backend to remove the course from the user's selection
+        
     });
 
     trashCell.appendChild(removeButton);
@@ -140,6 +166,7 @@ const addCourse = (courseTitle) => {
     // Append row to the Proposed Courses table
     proposedCoursesBody.appendChild(row);
 };
+
 
 
 // Fetch courses on page load
@@ -155,24 +182,30 @@ function generateSchedules() {
     // Collect courses data with proper structure
     const selectedCourses = [];
     proposedCoursesBody.querySelectorAll('tr').forEach(row => {
-        const courseText = row.querySelector('td:first-child').textContent.trim();
-        const [department_id, course_number] = courseText.split(' ');
+        // Extract values from their respective columns
+        const department_id = row.querySelector('td:nth-child(1)').textContent.trim(); // First column
+        const course_number = row.querySelector('td:nth-child(2)').textContent.trim(); // Second column
+        const courseTitle = row.querySelector('td:nth-child(3)').textContent.trim(); // Third column
+
+        // Push structured data into the array
         selectedCourses.push({
             department_id,
-            course_number
+            course_number,
+            title: courseTitle,
         });
     });
+
 
     // Collect reserved times with proper structure
     const reserved = [];
     reservedTimesBody.querySelectorAll('tr').forEach(row => {
-        const startTimeInput = row.querySelector('td:nth-child(1) input');
-        const endTimeInput = row.querySelector('td:nth-child(2) input');
-        const daysInput = row.querySelector('td:nth-child(3) input');
-
-        if (startTimeInput && endTimeInput && daysInput) {
+        const dayInput = row.querySelector('td:nth-child(1) input');
+        const startTimeInput = row.querySelector('td:nth-child(2) input');
+        const endTimeInput = row.querySelector('td:nth-child(3) input');
+       
+        if (startTimeInput && endTimeInput && dayInput) {
             reserved.push({
-                days: daysInput.value.split(''),  // Convert string to array of chars
+                days: dayInput.value.split(''),  // Convert string to array of chars
                 start_time: startTimeInput.value,
                 end_time: endTimeInput.value
             });
