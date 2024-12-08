@@ -212,20 +212,18 @@ function generateSchedules() {
         })
         .then(response => {
             const allSchedules = response.data.map((schedule, index) => {
-                const sections = schedule.sections.map(section => ({
-                    section_id: section.section_id,
-                    department_id: section.department_id,
-                    course_number: section.course_number,
-                    instructor: section.instructor,
-                    days: section.days.join(''),
-                    start_time: section.start_time,
-                    end_time: section.end_time,
-                }));
-                return {
-                    scheduleIndex: index + 1,
-                    sections: sections,
-                };
-            });
+            const allSchedules = response.data.map((schedule, index) => ({
+                scheduleIndex: index + 1,
+                sections: schedule.sections.map(section => [
+                    section.section_id,
+                    section.department_id,
+                    section.course_number,
+                    section.instructor,
+                    section.days.join(''),
+                    section.start_time,
+                    section.end_time
+                ])
+            }));
 
             // Save all schedules to localStorage
             localStorage.setItem('generatedSchedules', JSON.stringify(allSchedules));
