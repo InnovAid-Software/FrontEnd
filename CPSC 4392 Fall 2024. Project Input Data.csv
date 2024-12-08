@@ -1,0 +1,41 @@
+﻿Department ID,Course #,Course Title,Sec #,Instructor,Days,Start Time,End Time
+CPSC,2386,Machine Learning Fundamentals,01,Conde,MW,0800,0915
+MATH,1451,Calculus I,02,Wang,MW,0800,0915
+CPSC,2377,Introduction to Game Programming,01,Seward,MW,0925,1040
+MATH,1452,Calculus II,02,Ye,MW,0925,1040
+CHEM,1403,General Chemistry II,02,Baldord,MW,0925,1040
+CPSC,2376,Programming II,01,Seward,MW,1050,1205
+MATH,1452,Calculus II,01,Lu,MW,1050,1205
+MATH,2310,Discrete Structures,02,Wang,MW,1050,1205
+CPSC,1375,Programming I,01,Seward,MW,1215,1330
+PHYS,2321,Physics Sci & Engin I,01,Hall,MW,1215,1330
+CHEM,1402,General Chemistry I,01,Walker,MW,1215,1330
+CPSC,1375,Programming I,01,Seward,MW,1340,1455
+MATH,1302,College Algebra,01,Wang,MW,1340,1455
+CPSC,2380,Algorithms,01,Chiang,MW,1505,1620
+CSEC,2310,System Security,01,Passmore,MW,1505,1620
+CSEC,2320,Access Control,01,Huff,MW,1505,1620
+CSEC,2324,Network Security,01,Cox,MW,1505,1640
+CSEC,1310,Introduction to Cybersecurity,01,Passmore,MW,1630,1745
+CPSC,2376,Programming II,02,Orme,MW,1755,1910
+CPSC,1375,Programming I,03,Seward,TR,0800,0915
+CSEC,1310,Introduction to Cybersecurity,02,Huff,TR,0800,0915
+MATH,1451,Calculus I,01,Childers,TR,0800,0915
+CPSC,2386,Machine Learning Fundamentals,02,Conde,TR,0925,1040
+MATH,1303,Trigonometry,02,Barker,TR,0925,1040
+PHYS,2322,Physics Sci & Engin II,01,Hall,TR,0925,1040
+CSEC,2310,System Security,02,Passmore,TR,1050,1205
+MATH,2310,Discrete Structures,01,Wang,TR,1050,1205
+PHYS,2321,Physics Sci & Engin I,02,Hall,TR,1050,1205
+CPSC,2377,Introduction to Game Programming,02,Seward,TR,1215,1330
+CPSC,2482,Computer Organization,01,Orme,TR,1215,1330
+CPSC,1375,Programming I,04,Baker,TR,1215,1330
+CSEC,2320,Access Control,02,Huff,TR,1340,1455
+CHEM,1402,General Chemistry I,02,Begum,TR,1340,1455
+CHEM,1403,General Chemistry II,01,Baillie,TR,1340,1455
+CPSC,2380,Algorithms,02,Chiang,TR,1505,1620
+CPSC,2482,Computer Organization,02,Orme,TR,1505,1620
+CSEC,2324,Network Security,02,Cox,TR,1630,1745
+MATH,1302,College Algebra,02,Wang,TR,1755,1910
+CPSC,1375,Programming I,04,Duong,W,0900,1050
+MATH,1452,Calculus II,03,Street,W,1300,1500

@@ -78,51 +78,48 @@ function handleCSVUpload(event) {
     reader.onload = function(e) {
         const rows = e.target.result.split("\n");
         const coursesMap = new Map(); // To track unique courses
-        const sectionsData = [];
 
-        rows.forEach((row, index) => {
-            if (!row.trim()) return; // Skip empty rows
+        // Skip header row
+        for (let i = 1; i < rows.length; i++) {
+            const row = rows[i].trim();
+            if (!row) continue; // Skip empty rows
 
             const columns = row.split(",").map(col => col.trim());
             
-            // Check if we have enough columns for a section entry
-            if (columns.length >= 8) {
-                const [departmentId, courseNumber, courseTitle, sectionId, instructor, days, startTime, endTime] = columns;
+            // We only need the first 3 columns for courses
+            if (columns.length >= 3) {
+                const [departmentId, courseNumber, courseTitle] = columns;
 
-                // Add to courses map if not already present
+                // Create unique key for the course
                 const courseKey = `${departmentId}-${courseNumber}`;
+
+                // Only add if we haven't seen this course before
                 if (!coursesMap.has(courseKey)) {
+                    // Validate department ID and course number
+                    if (!/^[a-zA-Z]{4}$/.test(departmentId)) {
+                        console.warn(`Invalid Department ID: ${departmentId} in row ${i + 1}`);
+                        continue;
+                    }
+                    if (!/^\d{4}$/.test(courseNumber)) {
+                        console.warn(`Invalid Course Number: ${courseNumber} in row ${i + 1}`);
+                        continue;
+                    }
+
                     coursesMap.set(courseKey, {
                         departmentId,
                         courseNumber,
                         courseTitle
                     });
                 }
-
-                // Add to sections array
-                sectionsData.push({
-                    departmentId,
-                    courseNumber,
-                    courseTitle,
-                    sectionId,
-                    instructor,
-                    days,
-                    startTime,
-                    endTime
-                });
-            } else {
-                console.warn(`Row ${index + 1} has insufficient columns. Expected 8, got ${columns.length}`);
             }
-        });
+        }
 
-        // Convert courses map to array
-        const coursesData = Array.from(coursesMap.values());
+        // Convert map to array and update the courses array
+        courses = Array.from(coursesMap.values());
+        renderCourses(); // Update the table display
 
-        // Save courses to backend
-        saveCourseData(coursesData);
-
-        // Save sections to backend
-        saveSectionData(sectionsData);
+        // Save to backend
+        saveCourseData(courses);
     };
 
     reader.readAsText(file);
