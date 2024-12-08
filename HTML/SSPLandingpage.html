@@ -101,170 +101,171 @@
 
             <div id="studentContent" style="display: none;">
                 <!-- Student-specific content goes here -->
+                
+               
+                    <div class="container d-flex align-items-center justify-content-center full-height">
+                        <div class="row justify-content-center w-100">
+                            <!-- Left Column: Courses Selected -->
+                            <div class="col-md-3  mb-5 table-spacing">
+                                <!-- Table Title -->
 
-                <div class="container d-flex align-items-center justify-content-center full-height">
-                    <div class="row justify-content-center w-100">
-                        <!-- Left Column: Courses Selected -->
-                        <div class="col-md-3  mb-5 table-spacing">
-                            <!-- Table Title -->
-
-                            <table class="table table-bordered text-center" id="ProposedCoursesTable">
-                                <caption class="text-center font-weight-bold mb-2" style="caption-side: top; font-size: 1.6rem;">
-                                    Courses Selected:
-                                </caption>
-                                <thead>
-                                    <tr>
-                                        <th>Department ID</th>
-                                        <th>Course #</th>
-                                        <th>Course Title</th>
-                                        
-                                        <th> </th>
-                                    </tr>
-                                </thead>
-                                <tbody id="proposedCoursesBody">
-                                    <!--Rows will be dynamically inserted here-->
-                                </tbody>
-                            </table>
-
-
-                        </div>
-
-                        <!-- Right Column: Courses Available -->
-                        <div class="col-md-3 mb-5 table-spacing">
-                            <!-- Table Title -->
-
-                            <table class="table table-bordered text-center" id="CoursesAvailableTable">
-                                <caption class="text-center font-weight-bold mb-2" style="caption-side: top; font-size: 1.6rem;">
-                                    Courses Available:
-                                </caption>
-                                <thead>
-                                    <tr>
-                                        <th>Department ID</th>
-                                        <th>Course #</th>
-                                        <th>Course Title</th>
-                                        <th> </th>
-                                    </tr>
-                                </thead>
-                                <tbody id="availableCoursesBody">
-                                    <!--Rows will be dynamically inserted here-->
-                                </tbody>
-                            </table>
-                            <!-- Title and Buttons underneath Courses Available -->
-                            <div class="col-md-3 custom-margin">
-                                <!-- Title -->
-                                <!-- Input Table -->
-                                <table class="table table-bordered text-center " id="ReservedTimesTable">
+                                <table class="table table-bordered text-center" id="ProposedCoursesTable">
                                     <caption class="text-center font-weight-bold mb-2" style="caption-side: top; font-size: 1.6rem;">
-                                        Reserved Times:
+                                        Courses Selected:
                                     </caption>
-
                                     <thead>
                                         <tr>
-                                            <th>Day</th>
-                                            <th>Start Time</th>
+                                            <th>Department ID</th>
+                                            <th>Course #</th>
+                                            <th>Course Title</th>
 
-                                            <th>End Time</th>
-                                            <th>Description</th>
                                             <th> </th>
                                         </tr>
                                     </thead>
-                                    <tbody id="reservedTimesBody">
-                                        <tr>
-                                            <td> <input type="text" class="form-control-sm" placeholder="Ex:M " </td>
-
-                                            <td> <input type="text" class="form-control-sm" placeholder="Ex: 0900" </td>
-
-                                            <td> <input type="text" class="form-control-sm" placeholder="Ex: 1200"</td>
-
-                                            <td> <input type="text" class="form-control-sm" placeholder="Lunch time" </td>
-                                            <td>
-                                                <button type="button" id="RemoveReservedTime" class="btn btn-link p-0 text-danger remove-button" placeholder="Description">
-                                                    <i class="bi bi-trash">
-
-                                                    </i>
-
-                                                </button>
-
-                                            </td>
-                                        </tr>
+                                    <tbody id="proposedCoursesBody">
+                                        <!--Rows will be dynamically inserted here-->
                                     </tbody>
                                 </table>
-                                <!-- Save Button and Add Icon -->
-                                <div class="position-relative mt-3">
-                                    
-                                    <!-- Add Icon -->
-                                    <button type="button" class="btn btn-link text-primary ml-2 position-absolute" style="right: 300px; font-size: 1.5rem;" id="addIcon">
-                                        <i class="bi bi-plus-circle"></i> <!-- Bootstrap Plus Icon -->
-                                    </button>
-                                </div>
-                                <!-- Button below the table -->
-                                <div class="text-center mt-3">
-                                    <button type="button" class="btn btn-primary" onclick="generateSchedules()">Generate</button>
-                                </div>
 
-                                <div id="schedulesContainer" class="container mt-4">
-                                    <!-- Schedules will be dynamically added here -->
+
+                            </div>
+
+                            <!-- Right Column: Courses Available -->
+                            <div class="col-md-3 mb-5 table-spacing">
+                                <!-- Table Title -->
+
+                                <table class="table table-bordered text-center" id="CoursesAvailableTable">
+                                    <caption class="text-center font-weight-bold mb-2" style="caption-side: top; font-size: 1.6rem;">
+                                        Courses Available:
+                                    </caption>
+                                    <thead>
+                                        <tr>
+                                            <th>Department ID</th>
+                                            <th>Course #</th>
+                                            <th>Course Title</th>
+                                            <th> </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="availableCoursesBody">
+                                        <!--Rows will be dynamically inserted here-->
+                                    </tbody>
+                                </table>
+                                <!-- Title and Buttons underneath Courses Available -->
+                                <div class="col-md-3 custom-margin">
+                                    <!-- Title -->
+                                    <!-- Input Table -->
+                                    <table class="table table-bordered text-center " id="ReservedTimesTable">
+                                        <caption class="text-center font-weight-bold mb-2" style="caption-side: top; font-size: 1.6rem;">
+                                            Reserved Times:
+                                        </caption>
+
+                                        <thead>
+                                            <tr>
+                                                <th>Day</th>
+                                                <th>Start Time</th>
+
+                                                <th>End Time</th>
+                                                <th>Description</th>
+                                                <th> </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="reservedTimesBody">
+                                            <tr>
+                                                <td> <input type="text" class="form-control-sm" placeholder="Ex:M " </td>
+
+                                                <td> <input type="text" class="form-control-sm" placeholder="Ex: 0900" </td>
+
+                                                <td> <input type="text" class="form-control-sm" placeholder="Ex: 1200"</td>
+
+                                                <td> <input type="text" class="form-control-sm" placeholder="Lunch time" </td>
+                                                <td>
+                                                    <button type="button" id="RemoveReservedTime" class="btn btn-link p-0 text-danger remove-button" placeholder="Description">
+                                                        <i class="bi bi-trash">
+
+                                                        </i>
+
+                                                    </button>
+
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <!-- Save Button and Add Icon -->
+                                    <div class="position-relative mt-3">
+
+                                        <!-- Add Icon -->
+                                        <button type="button" class="btn btn-link text-primary ml-2 position-absolute" style="right: 300px; font-size: 1.5rem;" id="addIcon">
+                                            <i class="bi bi-plus-circle"></i> <!-- Bootstrap Plus Icon -->
+                                        </button>
+                                    </div>
+                                    <!-- Button below the table -->
+                                    <div class="text-center mt-3">
+                                        <button type="button" class="btn btn-primary" onclick="generateSchedules()">Generate</button>
+                                    </div>
+
+                                    <div id="schedulesContainer" class="container mt-4">
+                                        <!-- Schedules will be dynamically added here -->
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
+                    </div>
+                </div>
+
+
+
+
+                <div id="adminContent" style="display: none;">
+
+
+                    <div class="container mt-5">
+                        <h2>Course/Section Schedule</h2>
+
+                        <!-- Table -->
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Department</th>
+                                        <th>Course #</th>
+                                        <th>Course Title</th>
+                                        <th>Section #</th>
+                                        <th>Instructor</th>
+                                        <th>Days</th>
+                                        <th>Start Time</th>
+                                        <th>End Time</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="schedule-table-body">
+                                    <!-- Dynamic rows will be inserted here -->
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Buttons for Add, Import, Save -->
+                        <div class="d-flex justify-content-between mt-3">
+                            <button class="btn btn-primary btn-add" onclick="addNewSection()">+</button>
+                            <button class="btn btn-secondary" onclick="importCSV()">Import</button>
+                            <button class="btn btn-primary" onclick="getSections()">Get Sections</button>
+                            <button class="btn btn-success" onclick="saveSections()">Save</button>
+                        </div>
+
+                        <!-- Hidden Input for CSV Upload -->
+                        <input type="file" id="csv-file-input" style="display: none;" accept=".csv" onchange="handleCSVUpload(event)">
                     </div>
 
                 </div>
-                </div>
 
 
 
-
-            <div id="adminContent" style="display: none;">
-
-
-                <div class="container mt-5">
-                    <h2>Course/Section Schedule</h2>
-
-                    <!-- Table -->
-                    <div class="table-responsive">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Department</th>
-                                    <th>Course #</th>
-                                    <th>Course Title</th>
-                                    <th>Section #</th>
-                                    <th>Instructor</th>
-                                    <th>Days</th>
-                                    <th>Start Time</th>
-                                    <th>End Time</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="schedule-table-body">
-                                <!-- Dynamic rows will be inserted here -->
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <!-- Buttons for Add, Import, Save -->
-                    <div class="d-flex justify-content-between mt-3">
-                        <button class="btn btn-primary btn-add" onclick="addNewSection()">+</button>
-                        <button class="btn btn-secondary" onclick="importCSV()">Import</button>
-                        <button class="btn btn-primary" onclick="getSections()">Get Sections</button>
-                        <button class="btn btn-success" onclick="saveSections()">Save</button>
-                    </div>
-
-                    <!-- Hidden Input for CSV Upload -->
-                    <input type="file" id="csv-file-input" style="display: none;" accept=".csv" onchange="handleCSVUpload(event)">
-                </div>
-
-            </div>
-                
+                <script src="../JS/SSPLandingpage.js"></script>
 
 
-            <script src="../JS/SSPLandingpage.js"></script>
-
-
-            <!-- Bootstrap 4.5.2 JS (include before the closing body tag) -->
-            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+                <!-- Bootstrap 4.5.2 JS (include before the closing body tag) -->
+                <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
