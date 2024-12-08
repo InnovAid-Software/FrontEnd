@@ -129,17 +129,23 @@ function handleCSVUpload(event) {
         const reader = new FileReader();
         reader.onload = function (e) {
             const rows = e.target.result.split("\n");
+            sections = []; // Clear existing sections
 
-            rows.forEach((row, index) => {
-                if (!row.trim()) return; // Skip empty rows
+            // Skip header row
+            for (let i = 1; i < rows.length; i++) {
+                const row = rows[i].trim();
+                if (!row) continue; // Skip empty rows
 
                 const columns = row.split(",").map(col => col.trim());
                 if (columns.length < 8) {
-                    console.warn(`Row ${index + 1} is invalid or has missing fields.`);
-                    return;
+                    console.warn(`Row ${i + 1} is invalid or has missing fields.`);
+                    continue;
                 }
 
                 const [departmentId, courseNumber, courseTitle, sectionId, instructor, days, startTime, endTime] = columns;
+
+                // Convert days string (e.g., "MW") into an array of individual days
+                const daysArray = days.split("").filter(day => "MTWRF".includes(day));
 
                 sections.push({
                     departmentId,
@@ -147,11 +153,11 @@ function handleCSVUpload(event) {
                     courseTitle,
                     sectionId,
                     instructor,
-                    days,
+                    days: daysArray.join(""),  // Store as string for compatibility with existing code
                     startTime,
                     endTime,
                 });
-            });
+            }
 
             renderSections();
         };
@@ -167,8 +173,14 @@ function saveSections() {
     const updatedSections = [];
 
     rows.forEach(row => {
-        const inputs = row.querySelectorAll("input");
+        const inputs = row.querySelectorAll("input[type='text']");
         const checkboxes = row.querySelectorAll("input[type='checkbox']");
+
+        // Get checked days
+        const selectedDays = Array.from(checkboxes)
+            .filter(checkbox => checkbox.checked)
+            .map(checkbox => checkbox.parentElement.textContent.trim())
+            .join("");
 
         const section = {
             departmentId: inputs[0].value,
@@ -176,9 +188,7 @@ function saveSections() {
             courseTitle: inputs[2].value,
             sectionId: inputs[3].value,
             instructor: inputs[4].value,
-            days: Array.from(checkboxes)
-                .filter(checkbox => checkbox.checked)
-                .map(checkbox => checkbox.value),
+            days: selectedDays,
             startTime: inputs[5].value,
             endTime: inputs[6].value,
         };
@@ -186,7 +196,7 @@ function saveSections() {
         updatedSections.push(section);
     });
 
-    axios.post('https://innovaid.dev/api/schedule', updatedSections, {
+    axios.post('https://innovaid.dev/api/catalog/courses/sections', updatedSections, {
         headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
