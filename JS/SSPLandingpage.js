@@ -169,12 +169,10 @@ function generateSchedules() {
     // Collect courses data with proper structure
     const selectedCourses = [];
     proposedCoursesBody.querySelectorAll('tr').forEach(row => {
-        // Extract values from their respective columns
-        const department_id = row.querySelector('td:nth-child(1)').textContent.trim(); // First column
-        const course_number = row.querySelector('td:nth-child(2)').textContent.trim(); // Second column
-        const courseTitle = row.querySelector('td:nth-child(3)').textContent.trim(); // Third column
+        const department_id = row.querySelector('td:nth-child(1)').textContent.trim();
+        const course_number = row.querySelector('td:nth-child(2)').textContent.trim();
+        const courseTitle = row.querySelector('td:nth-child(3)').textContent.trim();
 
-        // Push structured data into the array
         selectedCourses.push({
             department_id,
             course_number,
@@ -182,55 +180,67 @@ function generateSchedules() {
         });
     });
 
-
     // Collect reserved times with proper structure
     const reserved = [];
     reservedTimesBody.querySelectorAll('tr').forEach(row => {
         const dayInput = row.querySelector('td:nth-child(1) input');
         const startTimeInput = row.querySelector('td:nth-child(2) input');
         const endTimeInput = row.querySelector('td:nth-child(3) input');
-       
+
         if (startTimeInput && endTimeInput && dayInput) {
             reserved.push({
-                days: dayInput.value.split(''),  // Convert string to array of chars
+                days: dayInput.value.split(''),
                 start_time: startTimeInput.value,
-                end_time: endTimeInput.value
+                end_time: endTimeInput.value,
             });
         }
     });
 
     const payload = {
         courses: selectedCourses,
-        reserved: reserved
+        reserved: reserved,
     };
 
-    axios.post('https://innovaid.dev/api/schedule/generate', payload, {
-        headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-            'Content-Type': 'application/json',
-        },
-    })
-    .then(response => {
-        // response.data is an array of schedule objects
-        response.data.forEach((schedule, index) => {
-            // Extract the sections array from each schedule object
-            const sections = schedule.sections.map(section => [
-                section.section_id,
-                section.department_id,
-                section.course_number,
-                section.instructor,
-                section.days.join(''),  // Join the days array into a string
-                section.start_time,
-                section.end_time
-            ]);
-            createScheduleTable(sections, index + 1, schedulesContainer);
+    axios
+        .post('https://innovaid.dev/api/schedule/generate', payload, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => {
+            const allSchedules = [];
+
+            response.data.forEach((schedule, index) => {
+                const sections = schedule.sections.map(section => [
+                    section.section_id,
+                    section.department_id,
+                    section.course_number,
+                    section.instructor,
+                    section.days.join(''),
+                    section.start_time,
+                    section.end_time,
+                ]);
+                createScheduleTable(sections, index + 1, schedulesContainer);
+
+                // Collect this schedule's data
+                allSchedules.push({
+                    scheduleIndex: index + 1,
+                    sections: sections,
+                });
+            });
+
+            // Save all schedules to localStorage
+            localStorage.setItem('generatedSchedules', JSON.stringify(allSchedules));
+
+           
+        })
+        .catch(error => {
+            console.error('Error generating schedules:', error);
+            alert('Failed to generate schedules. Please try again.');
         });
-    })
-    .catch(error => {
-        console.error('Error generating schedules:', error);
-        alert('Failed to generate schedules. Please try again.');
-    });
 }
+
 
 /**
 * Function to create a schedule table.
@@ -582,6 +592,12 @@ document.addEventListener('DOMContentLoaded', () => {
         <a class="nav-link" href="../HTMLStudent/SSPStudentSavedSchedulesPage.html">
             <i class='bx bx-file'></i>
            Saved Schedules
+        </a>
+
+        <li class="nav-item">
+        <a class="nav-link" href="../HTMLStudent/generatedSchedules.html">
+            <i class='bx bx-file'></i>
+           Generated Schedules
         </a>
  
     </li> `;
