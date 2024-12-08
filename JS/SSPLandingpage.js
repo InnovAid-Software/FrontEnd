@@ -45,6 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+
 // Fetch available courses from the backend and populate the table
 const fetchCourses = async () => {
     try {
@@ -56,7 +57,6 @@ const fetchCourses = async () => {
 
         const courses = response.data;
         const tableBody = document.getElementById('availableCoursesBody');
-        tableBody.innerHTML = ''; // Clear existing rows
 
         // Iterate over the courses and create rows
         courses.forEach(course => {
@@ -69,7 +69,7 @@ const fetchCourses = async () => {
 
             // Course number column
             const courseNumberCell = document.createElement('td');
-            courseNumberCell.textContent = course.course_number; //check for Names Backend
+            courseNumberCell.textContent = course.course_number;
             row.appendChild(courseNumberCell);
 
             // Course title column
@@ -102,6 +102,10 @@ const fetchCourses = async () => {
         console.error("Error fetching data:", error);
     }
 };
+
+
+
+
 
 
 // Handle adding a course
