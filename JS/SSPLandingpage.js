@@ -77,17 +77,17 @@ const fetchCourses = async () => {
 
             // Department ID column
             const departmentIdCell = document.createElement('td');
-            departmentIdCell.textContent = course.departmentId;
+            departmentIdCell.textContent = course.department_id;
             row.appendChild(departmentIdCell);
 
             // Course number column
             const courseNumberCell = document.createElement('td');
-            courseNumberCell.textContent = course.courseNumber; //check for Names Backend
+            courseNumberCell.textContent = course.course_number; //check for Names Backend
             row.appendChild(courseNumberCell);
 
             // Course title column
             const courseTitleCell = document.createElement('td');
-            courseTitleCell.textContent = course.courseTitle;
+            courseTitleCell.textContent = course.course_title;
             row.appendChild(courseTitleCell);
 
             // Add icon column
@@ -99,9 +99,9 @@ const fetchCourses = async () => {
             // Add click event to icon
             addIcon.addEventListener('click', () => {
                 addCourse({
-                    departmentId: course.departmentId,
-                    courseNumber: course.courseNumber,
-                    courseTitle: course.courseTitle,
+                    departmentId: course.department_id,
+                    courseNumber: course.course_number,
+                    courseTitle: course.course_title,
                 });
             });
 
