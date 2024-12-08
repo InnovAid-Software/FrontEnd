@@ -211,7 +211,6 @@ function generateSchedules() {
             },
         })
         .then(response => {
-            const allSchedules = response.data.map((schedule, index) => {
             const allSchedules = response.data.map((schedule, index) => ({
                 scheduleIndex: index + 1,
                 sections: schedule.sections.map(section => [
