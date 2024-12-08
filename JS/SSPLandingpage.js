@@ -1,7 +1,6 @@
 const body = document.querySelector("body"),
     modeToggle = body.querySelector(".mode-toggle"),
     sidebar = body.querySelector("nav"),
-    sidebarToggle = body.querySelector(".sidebar-toggle"),
     mainContent = document.querySelector("main");
 
 // Toggle Dark Mode
@@ -9,19 +8,7 @@ modeToggle.addEventListener("click", () => {
     body.classList.toggle("dark-mode"); // Changed to 'dark-mode' for specificity
 });
 
-// Toggle Sidebar Visibility
-sidebarToggle.addEventListener("click", () => {
-    sidebar.classList.toggle("d-none"); // Use Bootstrap's 'd-none' class for hiding the sidebar
-    mainContent.classList.toggle("flex-grow-1"); // Adjust content layout dynamically
-});
 
-// Add smooth transition effects
-sidebar.style.transition = "all 0.3s ease";
-mainContent.style.transition = "all 0.3s ease";
-
-sidebarToggle.addEventListener("click", () => {
-    sidebar.classList.toggle("close");
-});
 
 //Student Homepage
 //Event Listener for the 'Add' icon click
@@ -757,4 +744,35 @@ function saveCourses() {
         alert("An error occurred while saving the catalog courses.");
     });
 }
+function getSections() {
+    axios.get("https://innovaid.dev/api/catalog/courses/sections", {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+    })
+    .then(response => {
+        // Update the local sections array with the fetched data
+        sections = response.data.map(section => ({
+            departmentId: section.departmentId,
+            courseNumber: section.courseNumber,
+            courseTitle: section.courseTitle,
+            sectionId: section.sectionId,
+            instructor: section.instructor,
+            days: section.days || "", // Handle days being null or missing
+            startTime: section.startTime,
+            endTime: section.endTime,
+        }));
+
+        // Re-render the table with the updated sections
+        renderSections();
+
+        console.log("Sections fetched successfully:", response.data);
+        alert("Sections fetched and updated successfully!");
+    })
+    .catch(error => {
+        console.error("Error fetching sections:", error.response?.data || error.message);
+        alert("An error occurred while fetching the sections.");
+    });
+}
+
 
