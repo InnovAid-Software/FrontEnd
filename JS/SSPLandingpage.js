@@ -327,6 +327,10 @@ function saveSchedule(schedule) {
 
 **/
 
+
+
+
+
 //Admin user
 //admin js
 // Array to hold the section data locally
@@ -566,6 +570,17 @@ function getSections() {
 
 // Initial rendering of the table
 renderSections();
+
+
+
+
+
+
+
+
+
+
+
 
 
 
