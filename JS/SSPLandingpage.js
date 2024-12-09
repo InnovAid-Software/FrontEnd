@@ -69,108 +69,121 @@ const fetchCourses = async () => {
             }
         });
 
-        const courses = response.data;
-        const tableBody = document.getElementById('availableCoursesBody');
+        const coursesList = document.getElementById('availableCoursesList');
+        coursesList.innerHTML = '';
 
-        // Iterate over the courses and create rows
-        courses.forEach(course => {
-            const row = document.createElement('tr');
+        response.data.forEach(course => {
+            const courseElement = document.createElement('div');
+            courseElement.className = 'list-group-item course-item';
+            courseElement.innerHTML = `
+                <div class="course-info">
+                    <div class="course-code">${course.department_id} ${course.course_number}</div>
+                    <div class="course-title">${course.course_title}</div>
+                </div>
+                <button class="btn btn-sm btn-outline-primary add-course">
+                    <i class="bi bi-plus-lg"></i>
+                </button>
+            `;
 
-            // Department ID column
-            const departmentIdCell = document.createElement('td');
-            departmentIdCell.textContent = course.department_id;
-            row.appendChild(departmentIdCell);
-
-            // Course number column
-            const courseNumberCell = document.createElement('td');
-            courseNumberCell.textContent = course.course_number;
-            row.appendChild(courseNumberCell);
-
-            // Course title column
-            const courseTitleCell = document.createElement('td');
-            courseTitleCell.textContent = course.course_title;
-            row.appendChild(courseTitleCell);
-
-            // Add icon column
-            const addCell = document.createElement('td');
-            const addIcon = document.createElement('i');
-            addIcon.className = 'fas fa-plus-circle text-success'; // Font Awesome icon
-            addIcon.style.cursor = 'pointer';
-
-            // Add click event to icon
-            addIcon.addEventListener('click', () => {
-                addCourse({
-                    departmentId: course.department_id,
-                    courseNumber: course.course_number,
-                    courseTitle: course.course_title,
-                });
+            courseElement.querySelector('.add-course').addEventListener('click', () => {
+                addCourse(course);
             });
 
-            addCell.appendChild(addIcon);
-            row.appendChild(addCell);
-
-            // Append row to table body
-            tableBody.appendChild(row);
+            coursesList.appendChild(courseElement);
         });
     } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error("Error fetching courses:", error);
     }
 };
 
+const addCourse = (course) => {
+    const selectedList = document.getElementById('selectedCoursesList');
+    const courseId = `${course.department_id}-${course.course_number}`;
 
+    if (!document.getElementById(courseId)) {
+        const courseElement = document.createElement('div');
+        courseElement.className = 'list-group-item course-item';
+        courseElement.id = courseId;
+        courseElement.innerHTML = `
+            <div class="course-info">
+                <div class="course-code">${course.department_id} ${course.course_number}</div>
+                <div class="course-title">${course.course_title}</div>
+            </div>
+            <button class="btn btn-sm btn-outline-danger remove-course">
+                <i class="bi bi-trash"></i>
+            </button>
+        `;
 
+        courseElement.querySelector('.remove-course').addEventListener('click', () => {
+            selectedList.removeChild(courseElement);
+            updateSelectedCount();
+        });
 
+        selectedList.appendChild(courseElement);
+        updateSelectedCount();
+    }
+};
 
+const updateSelectedCount = () => {
+    const count = document.getElementById('selectedCoursesList').children.length;
+    document.getElementById('selectedCount').textContent = count;
+};
 
-// Handle adding a course
-const addCourse = ({ departmentId, courseNumber, courseTitle }) => {
-    const proposedCoursesBody = document.getElementById('proposedCoursesBody');
+// Reserved Times Management
+// Add time validation function
+function validateTimeFormat(timeString) {
+    const timeRegex = /^([01]\d|2[0-3])([0-5]\d)$/; // Matches HHMM format
+    return timeRegex.test(timeString);
+}
 
-    // Create a new row for the selected course
-    const row = document.createElement('tr');
+// Update the addTimeBtn click handler
+document.getElementById('addTimeBtn').addEventListener('click', () => {
+    const timesList = document.getElementById('reservedTimesList');
+    const timeSlot = document.createElement('div');
+    timeSlot.className = 'list-group-item time-slot';
+    timeSlot.innerHTML = `
+        <input type="text" class="form-control form-control-sm" placeholder="Days (M,T,W,R,F)" maxlength="5">
+        <input type="text" class="form-control form-control-sm time-input" placeholder="Start (HHMM)" 
+            onchange="validateTimeInput(this)">
+        <input type="text" class="form-control form-control-sm time-input" placeholder="End (HHMM)"
+            onchange="validateTimeInput(this)">
+        <button class="btn btn-sm btn-outline-danger">
+            <i class="bi bi-trash"></i>
+        </button>
+    `;
 
-    // Department ID column
-    const departmentIdCell = document.createElement('td');
-    departmentIdCell.textContent = departmentId;
-    row.appendChild(departmentIdCell);
-
-    // Course Number column
-    const courseNumberCell = document.createElement('td');
-    courseNumberCell.textContent = courseNumber;
-    row.appendChild(courseNumberCell);
-
-    // Course Title column
-    const courseTitleCell = document.createElement('td');
-    courseTitleCell.textContent = courseTitle;
-    row.appendChild(courseTitleCell);
-
-    // Trash icon column (for removal)
-    const trashCell = document.createElement('td');
-
-    // Create the button element for trash icon
-    const removeButton = document.createElement('button');
-    removeButton.type = 'button';
-    removeButton.className = 'btn btn-link p-0 text-danger remove-button';
-    removeButton.placeholder = 'Description';
-
-    // Create the trash icon inside the button
-    const trashIcon = document.createElement('i');
-    trashIcon.className = 'bi bi-trash'; // Bootstrap Icons trash icon
-    removeButton.appendChild(trashIcon);
-
-    // Add click event to remove the course
-    removeButton.addEventListener('click', () => {
-        row.remove(); // Remove the row from the table
-        console.log(`Removed course: ${courseTitle}`);
-        
+    timeSlot.querySelector('.btn-outline-danger').addEventListener('click', () => {
+        timesList.removeChild(timeSlot);
     });
 
-    trashCell.appendChild(removeButton);
-    row.appendChild(trashCell);
+    timesList.appendChild(timeSlot);
+});
 
-    // Append row to the Proposed Courses table
-    proposedCoursesBody.appendChild(row);
-};
+// Add time validation handler
+function validateTimeInput(input) {
+    const value = input.value;
+    if (!validateTimeFormat(value)) {
+        alert("Please enter time in HHMM format (24-hour clock).");
+        input.value = '';
+        input.focus();
+    }
+}
+
+// Search Functionality
+document.getElementById('courseSearch').addEventListener('input', (e) => {
+    const searchTerm = e.target.value.toLowerCase();
+    const courses = document.querySelectorAll('#availableCoursesList .course-item');
+    
+    courses.forEach(course => {
+        const text = course.textContent.toLowerCase();
+        course.style.display = text.includes(searchTerm) ? '' : 'none';
+    });
+});
+
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+    fetchCourses();
+});
 
 
 
@@ -179,15 +192,15 @@ document.addEventListener('DOMContentLoaded', fetchCourses);
 
 
 function generateSchedules() {
-    const proposedCoursesBody = document.getElementById('proposedCoursesBody');
-    const reservedTimesBody = document.getElementById('reservedTimesBody');
+    const selectedCoursesList = document.getElementById('selectedCoursesList');
+    const reservedTimesList = document.getElementById('reservedTimesList');
 
-    // Collect courses data with proper structure
+    // Collect courses data
     const selectedCourses = [];
-    proposedCoursesBody.querySelectorAll('tr').forEach(row => {
-        const department_id = row.querySelector('td:nth-child(1)').textContent.trim();
-        const course_number = row.querySelector('td:nth-child(2)').textContent.trim();
-        const courseTitle = row.querySelector('td:nth-child(3)').textContent.trim();
+    selectedCoursesList.querySelectorAll('.course-item').forEach(item => {
+        const courseCode = item.querySelector('.course-code').textContent;
+        const [department_id, course_number] = courseCode.split(' ');
+        const courseTitle = item.querySelector('.course-title').textContent;
 
         selectedCourses.push({
             department_id,
@@ -196,18 +209,19 @@ function generateSchedules() {
         });
     });
 
-    // Collect reserved times with proper structure
+    // Collect reserved times
     const reserved = [];
-    reservedTimesBody.querySelectorAll('tr').forEach(row => {
-        const dayInput = row.querySelector('td:nth-child(1) input');
-        const startTimeInput = row.querySelector('td:nth-child(2) input');
-        const endTimeInput = row.querySelector('td:nth-child(3) input');
+    reservedTimesList.querySelectorAll('.time-slot').forEach(slot => {
+        const inputs = slot.querySelectorAll('input');
+        const days = inputs[0].value;
+        const startTime = inputs[1].value;
+        const endTime = inputs[2].value;
 
-        if (startTimeInput && endTimeInput && dayInput) {
+        if (days && startTime && endTime) {
             reserved.push({
-                days: dayInput.value.split(''),
-                start_time: startTimeInput.value,
-                end_time: endTimeInput.value,
+                days: days.split(''),
+                start_time: startTime,
+                end_time: endTime,
             });
         }
     });
@@ -217,37 +231,34 @@ function generateSchedules() {
         reserved: reserved,
     };
 
-    axios
-        .post('https://innovaid.dev/api/schedule/generate', payload, {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
-                'Content-Type': 'application/json',
-            },
-        })
-        .then(response => {
-            const allSchedules = response.data.map((schedule, index) => ({
-                scheduleIndex: index + 1,
-                sections: schedule.sections.map(section => [
-                    section.section_id,
-                    section.department_id,
-                    section.course_number,
-                    section.instructor,
-                    section.days.join(''),
-                    section.start_time,
-                    section.end_time
-                ])
-            }));
+    // Rest of the generate schedules function remains the same
+    axios.post('https://innovaid.dev/api/schedule/generate', payload, {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            'Content-Type': 'application/json',
+        },
+    })
+    .then(response => {
+        const allSchedules = response.data.map((schedule, index) => ({
+            scheduleIndex: index + 1,
+            sections: schedule.sections.map(section => [
+                section.section_id,
+                section.department_id,
+                section.course_number,
+                section.instructor,
+                section.days.join(''),
+                section.start_time,
+                section.end_time
+            ])
+        }));
 
-            // Save all schedules to localStorage
-            localStorage.setItem('generatedSchedules', JSON.stringify(allSchedules));
-
-            // Redirect to the schedules page
-            window.location.href = '../HTMLStudent/generatedSchedules.html';
-        })
-        .catch(error => {
-            console.error('Error generating schedules:', error);
-            alert('Failed to generate schedules. Please try again.');
-        });
+        localStorage.setItem('generatedSchedules', JSON.stringify(allSchedules));
+        window.location.href = '../HTMLStudent/generatedSchedules.html';
+    })
+    .catch(error => {
+        console.error('Error generating schedules:', error);
+        alert('Failed to generate schedules. Please try again.');
+    });
 }
 
 

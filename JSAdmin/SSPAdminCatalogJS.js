@@ -119,7 +119,7 @@ function handleCSVUpload(event) {
         renderCourses(); // Update the table display
 
         // Save to backend
-        saveCourseData(courses);
+        saveCourses(courses);
     };
 
     reader.readAsText(file);

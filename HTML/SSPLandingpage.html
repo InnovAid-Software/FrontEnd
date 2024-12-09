@@ -35,7 +35,7 @@
             <!-- Logo Section -->
             <div class="logo">
                 <img src="../Assests/logo.png" alt="logo">
-                <span class="logo-name">InovAid</span>
+                <span class="logo-name">InnovAid</span>
             </div>
 
             <!-- Navigation Links -->
@@ -100,118 +100,64 @@
 
 
             <div id="studentContent" style="display: none;">
-                <!-- Student-specific content goes here -->
-                
-               
-                    <div class="container d-flex align-items-center justify-content-center full-height">
-                        <div class="row justify-content-center w-100">
-                            <!-- Left Column: Courses Selected -->
-                            <div class="col-md-3  mb-5 table-spacing">
-                                <!-- Table Title -->
-
-                                <table class="table table-bordered text-center" id="ProposedCoursesTable">
-                                    <caption class="text-center font-weight-bold mb-2" style="caption-side: top; font-size: 1.6rem;">
-                                        Courses Selected:
-                                    </caption>
-                                    <thead>
-                                        <tr>
-                                            <th>Department ID</th>
-                                            <th>Course #</th>
-                                            <th>Course Title</th>
-
-                                            <th> </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="proposedCoursesBody">
-                                        <!--Rows will be dynamically inserted here-->
-                                    </tbody>
-                                </table>
-
-
-                            </div>
-
-                            <!-- Right Column: Courses Available -->
-                            <div class="col-md-3 mb-5 table-spacing">
-                                <!-- Table Title -->
-
-                                <table class="table table-bordered text-center" id="CoursesAvailableTable">
-                                    <caption class="text-center font-weight-bold mb-2" style="caption-side: top; font-size: 1.6rem;">
-                                        Courses Available:
-                                    </caption>
-                                    <thead>
-                                        <tr>
-                                            <th>Department ID</th>
-                                            <th>Course #</th>
-                                            <th>Course Title</th>
-                                            <th> </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="availableCoursesBody">
-                                        <!--Rows will be dynamically inserted here-->
-                                    </tbody>
-                                </table>
-                                <!-- Title and Buttons underneath Courses Available -->
-                                <div class="col-md-3 custom-margin">
-                                    <!-- Title -->
-                                    <!-- Input Table -->
-                                    <table class="table table-bordered text-center " id="ReservedTimesTable">
-                                        <caption class="text-center font-weight-bold mb-2" style="caption-side: top; font-size: 1.6rem;">
-                                            Reserved Times:
-                                        </caption>
-
-                                        <thead>
-                                            <tr>
-                                                <th>Day</th>
-                                                <th>Start Time</th>
-
-                                                <th>End Time</th>
-                                                <th>Description</th>
-                                                <th> </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="reservedTimesBody">
-                                            <tr>
-                                                <td> <input type="text" class="form-control-sm" placeholder="Ex:M " /> </td>
-
-                                                <td> <input type="text" class="form-control-sm" placeholder="Ex: 0900"/> </td>
-
-                                                <td> <input type="text" class="form-control-sm" placeholder="Ex: 1200" /> </td>
-
-                                                <td> <input type="text" class="form-control-sm" placeholder="Lunch time" />  </td>
-                                                <td>
-                                                    <button type="button" id="RemoveReservedTime" class="btn btn-link p-0 text-danger remove-button" placeholder="Description">
-                                                        <i class="bi bi-trash">
-
-                                                        </i>
-
-                                                    </button>
-
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <!-- Save Button and Add Icon -->
-                                    <div class="position-relative mt-3">
-
-                                        <!-- Add Icon -->
-                                        <button type="button" class="btn btn-link text-primary ml-2 position-absolute" style="right: 300px; font-size: 1.5rem;" id="addIcon">
-                                            <i class="bi bi-plus-circle"></i> <!-- Bootstrap Plus Icon -->
-                                        </button>
-                                    </div>
-                                    <!-- Button below the table -->
-                                    <div class="text-center mt-3">
-                                        <button type="button" class="btn btn-primary" onclick="generateSchedules()">Generate</button>
-                                    </div>
-
-                                    <div id="schedulesContainer" class="container mt-4">
-                                        <!-- Schedules will be dynamically added here -->
+                <div class="container-fluid p-4">
+                    <div class="row">
+                        <!-- Selected Courses Card -->
+                        <div class="col-md-4">
+                            <div class="card shadow-sm">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h3 class="mb-0">Selected Courses</h3>
+                                    <span class="badge badge-primary" id="selectedCount">0</span>
+                                </div>
+                                <div class="card-body p-0">
+                                    <div class="list-group list-group-flush" id="selectedCoursesList">
+                                        <!-- Selected courses will be added here -->
                                     </div>
                                 </div>
                             </div>
                         </div>
 
+                        <!-- Available Courses Card -->
+                        <div class="col-md-4">
+                            <div class="card shadow-sm">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h3 class="mb-0">Available Courses</h3>
+                                    <div class="input-group input-group-sm w-50">
+                                        <input type="text" class="form-control" id="courseSearch" placeholder="Search courses...">
+                                    </div>
+                                </div>
+                                <div class="card-body p-0">
+                                    <div class="list-group list-group-flush" id="availableCoursesList">
+                                        <!-- Available courses will be added here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Reserved Times Card -->
+                        <div class="col-md-4">
+                            <div class="card shadow-sm">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h3 class="mb-0">Reserved Times</h3>
+                                    <button class="btn btn-sm btn-primary" id="addTimeBtn">
+                                        <i class="bi bi-plus-lg"></i> Add Time
+                                    </button>
+                                </div>
+                                <div class="card-body p-0">
+                                    <div class="list-group list-group-flush" id="reservedTimesList">
+                                        <!-- Reserved times will be added here -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center mt-3">
+                                <button class="btn btn-lg btn-primary" onclick="generateSchedules()">
+                                    Generate Schedules
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
+            </div>
 
 
 
