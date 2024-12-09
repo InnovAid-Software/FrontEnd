@@ -1,4 +1,6 @@
-//admin js
+// JavaScript source code
+
+//root js
 // Array to hold the course data locally
 let courses = [];
 
@@ -73,7 +75,7 @@ function handleCSVUpload(event) {
     if (!file) return;
 
     const reader = new FileReader();
-    reader.onload = function(e) {
+    reader.onload = function (e) {
         const rows = e.target.result.split("\n");
         const coursesMap = new Map(); // To track unique courses
 
@@ -83,7 +85,7 @@ function handleCSVUpload(event) {
             if (!row) continue; // Skip empty rows
 
             const columns = row.split(",").map(col => col.trim());
-            
+
             // We only need the first 3 columns for courses
             if (columns.length >= 3) {
                 const [departmentId, courseNumber, courseTitle] = columns;
@@ -130,14 +132,59 @@ function saveCourseData(coursesData) {
             'Content-Type': 'application/json',
         },
     })
-    .then(response => {
-        console.log("Courses saved successfully:", response.data);
-        alert("Courses imported and saved successfully!");
+        .then(response => {
+            console.log("Courses saved successfully:", response.data);
+        })
+        .catch(error => {
+            console.error("Error saving courses:", error.response?.data || error.message);
+        });
+}
+
+function saveSectionData(sectionsData) {
+    axios.post("https://innovaid.dev/api/catalog/courses/sections", sectionsData, {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            'Content-Type': 'application/json',
+        },
     })
-    .catch(error => {
-        console.error("Error saving courses:", error.response?.data || error.message);
-        alert("Error saving courses. Please check the console for details.");
-    });
+        .then(response => {
+            console.log("Sections saved successfully:", response.data);
+        })
+        .catch(error => {
+            console.error("Error saving sections:", error.response?.data || error.message);
+        });
+}
+
+// Initial rendering of the table
+renderCourses();
+
+// Function to save courses to the backend
+function saveCourses() {
+    const catalogData = courses.map(course => ({
+        departmentId: course.departmentId,
+        courseNumber: course.courseNumber,
+        courseTitle: course.courseTitle,
+    }));
+
+    if (catalogData.length === 0) {
+        alert("No courses to save.");
+        return;
+    }
+
+    axios.post("https://innovaid.dev/api/catalog/courses", catalogData, {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            'Content-Type': 'application/json',
+        },
+    })
+        .then(response => {
+            console.log("Catalog Courses saved successfully:", response.data);
+            alert("Courses saved successfully!");
+        })
+        .catch(error => {
+            console.error("Error saving catalog courses:", error.response?.data || error.message);
+            alert("An error occurred while saving the catalog courses.");
+        });
 }
 function getCatalog() {
     axios.get("https://innovaid.dev/api/catalog/courses", {
@@ -145,26 +192,22 @@ function getCatalog() {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
     })
-    .then(response => {
-        // Update the local courses array with the fetched data
-        courses = response.data.map(course => ({
-            departmentId: course.departmentId,
-            courseNumber: course.courseNumber,
-            courseTitle: course.courseTitle,
-        }));
+        .then(response => {
+            // Update the local courses array with the fetched data
+            courses = response.data.map(course => ({
+                departmentId: course.departmentId,
+                courseNumber: course.courseNumber,
+                courseTitle: course.courseTitle,
+            }));
 
-        // Re-render the table with the updated courses
-        renderCourses();
+            // Re-render the table with the updated courses
+            renderCourses();
 
-        console.log("Catalog fetched successfully:", response.data);
-        alert("Catalog fetched and updated successfully!");
-    })
-    .catch(error => {
-        console.error("Error fetching catalog:", error.response?.data || error.message);
-        alert("An error occurred while fetching the catalog.");
-    });
+            console.log("Catalog fetched successfully:", response.data);
+            alert("Catalog fetched and updated successfully!");
+        })
+        .catch(error => {
+            console.error("Error fetching catalog:", error.response?.data || error.message);
+            alert("An error occurred while fetching the catalog.");
+        });
 }
-
-
-// Initial rendering of the table
-renderCourses();
