@@ -125,21 +125,6 @@ function handleCSVUpload(event) {
     reader.readAsText(file);
 }
 
-function saveCourseData(coursesData) {
-    axios.post("https://innovaid.dev/api/catalog/courses", coursesData, {
-        headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-            'Content-Type': 'application/json',
-        },
-    })
-        .then(response => {
-            console.log("Courses saved successfully:", response.data);
-        })
-        .catch(error => {
-            console.error("Error saving courses:", error.response?.data || error.message);
-        });
-}
-
 function saveSectionData(sectionsData) {
     axios.post("https://innovaid.dev/api/catalog/courses/sections", sectionsData, {
         headers: {
@@ -149,9 +134,11 @@ function saveSectionData(sectionsData) {
     })
         .then(response => {
             console.log("Sections saved successfully:", response.data);
+            alert("Sections saved successfully!");
         })
         .catch(error => {
             console.error("Error saving sections:", error.response?.data || error.message);
+            alert("Error saving sections: " + (error.response?.data?.error || error.message));
         });
 }
 
@@ -186,6 +173,7 @@ function saveCourses() {
             alert("An error occurred while saving the catalog courses.");
         });
 }
+
 function getCatalog() {
     axios.get("https://innovaid.dev/api/catalog/courses", {
         headers: {
@@ -193,26 +181,18 @@ function getCatalog() {
         },
     })
         .then(response => {
-
-            console.log("Raw API response:", response.data); // Inspect the raw API data
-
-            // Update the local courses array with the fetched data
+            // Update mapping to match backend response format
             courses = response.data.map(course => ({
-                departmentId: course.departmentId || course.department_id || "",
-                courseNumber: course.courseNumber || course.course_number || "",
-                courseTitle: course.courseTitle || course.course_title || "",
+                departmentId: course.department_id,
+                courseNumber: course.course_number,
+                courseTitle: course.course_title
             }));
-
-            // Debug the processed courses array
-            console.log("Processed courses:", courses); // Check the mapped array
-
-            // Re-render the table with the updated courses
             renderCourses();
-            console.log("Catalog fetched successfully:", response.data);
+            console.log("Catalog fetched successfully");
             alert("Catalog fetched and updated successfully!");
         })
         .catch(error => {
             console.error("Error fetching catalog:", error.response?.data || error.message);
-            alert("An error occurred while fetching the catalog.");
+            alert("Error fetching catalog: " + (error.response?.data?.error || error.message));
         });
 }
