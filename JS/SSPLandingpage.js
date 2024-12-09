@@ -8,6 +8,20 @@ modeToggle.addEventListener("click", () => {
     body.classList.toggle("dark-mode"); // Changed to 'dark-mode' for specificity
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+    const logoutButton = document.querySelector('.nav-link i.bx-log-out').parentElement;
+
+    logoutButton.addEventListener('click', (event) => {
+        event.preventDefault();
+        //clear storage
+        localStorage.removeItem('token');
+        localStorage.removeItem('role');
+        //redirect
+        window.location.href = '../HTML/SSPLoginPage.html';
+    })
+
+});
+
 
 
 //Student Homepage
