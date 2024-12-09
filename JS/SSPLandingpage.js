@@ -231,7 +231,6 @@ function generateSchedules() {
         reserved: reserved,
     };
 
-    // Rest of the generate schedules function remains the same
     axios.post('https://innovaid.dev/api/schedule/generate', payload, {
         headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -257,7 +256,25 @@ function generateSchedules() {
     })
     .catch(error => {
         console.error('Error generating schedules:', error);
-        alert('Failed to generate schedules. Please try again.');
+        
+        // Handle specific error messages from the backend
+        if (error.response && error.response.status === 404) {
+            const message = error.response.data.message;
+            
+            if (message.includes('No sections found for')) {
+                // Extract course info from error message
+                const courseInfo = message.split('No sections found for ')[1];
+                alert(`No available sections found for ${courseInfo}. Please choose different courses.`);
+            } else if (message.includes('No valid schedules found')) {
+                alert('Unable to generate schedules: All possible combinations have time conflicts. Please adjust your course selection or reserved times.');
+            } else if (message.includes('No possible schedule combinations')) {
+                alert('No possible schedules could be generated with your selected courses. Please try different combinations.');
+            } else {
+                alert('Failed to generate schedules. Please check your course selection and try again.');
+            }
+        } else {
+            alert('An error occurred while generating schedules. Please try again.');
+        }
     });
 }
 

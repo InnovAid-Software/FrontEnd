@@ -1,5 +1,9 @@
-// JavaScript source code
-
+function isDuplicateCourse(newCourse, existingCourses) {
+    return existingCourses.some(course => 
+        course.departmentId === newCourse.departmentId && 
+        course.courseNumber === newCourse.courseNumber
+    );
+}
 //root js
 // Array to hold the course data locally
 let courses = [];
@@ -37,11 +41,13 @@ function renderCourses() {
 
 // Function to add a new course row
 function addNewCourse() {
-    courses.push({
+    const newCourse = {
         departmentId: "",
         courseNumber: "",
         courseTitle: ""
-    });
+    };
+    
+    courses.push(newCourse);
     renderCourses();
 }
 
@@ -158,6 +164,23 @@ function saveCourses() {
         return;
     }
 
+    // Check for duplicates before saving
+    const duplicates = [];
+    const seen = new Set();
+    
+    catalogData.forEach(course => {
+        const key = `${course.departmentId}-${course.courseNumber}`;
+        if (seen.has(key)) {
+            duplicates.push(`${course.departmentId} ${course.courseNumber}`);
+        }
+        seen.add(key);
+    });
+
+    if (duplicates.length > 0) {
+        alert(`The following courses are duplicates and cannot be saved:\n${duplicates.join('\n')}`);
+        return;
+    }
+
     axios.post("https://innovaid.dev/api/catalog/courses", catalogData, {
         headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -166,9 +189,11 @@ function saveCourses() {
     })
     .then(response => {
         console.log("Courses saved successfully:", response.data);
+        alert("Courses saved successfully!");
     })
     .catch(error => {
         console.error("Error saving courses:", error.response?.data || error.message);
+        alert("Error saving courses: " + (error.response?.data?.error || error.message));
     });
 }
 

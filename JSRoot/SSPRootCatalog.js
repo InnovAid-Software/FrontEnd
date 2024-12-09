@@ -1,5 +1,9 @@
-// JavaScript source code
-
+function isDuplicateCourse(newCourse, existingCourses) {
+    return existingCourses.some(course => 
+        course.departmentId === newCourse.departmentId && 
+        course.courseNumber === newCourse.courseNumber
+    );
+}
 //root js
 // Array to hold the course data locally
 let courses = [];
@@ -37,11 +41,13 @@ function renderCourses() {
 
 // Function to add a new course row
 function addNewCourse() {
-    courses.push({
+    const newCourse = {
         departmentId: "",
         courseNumber: "",
         courseTitle: ""
-    });
+    };
+    
+    courses.push(newCourse);
     renderCourses();
 }
 
@@ -119,40 +125,10 @@ function handleCSVUpload(event) {
         renderCourses(); // Update the table display
 
         // Save to backend
-        saveCourseData(courses);
+        saveCourses(courses);
     };
 
     reader.readAsText(file);
-}
-
-function saveCourseData(coursesData) {
-    axios.post("https://innovaid.dev/api/catalog/courses", coursesData, {
-        headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-            'Content-Type': 'application/json',
-        },
-    })
-    .then(response => {
-        console.log("Courses saved successfully:", response.data);
-    })
-    .catch(error => {
-        console.error("Error saving courses:", error.response?.data || error.message);
-    });
-}
-
-function saveSectionData(sectionsData) {
-    axios.post("https://innovaid.dev/api/catalog/courses/sections", sectionsData, {
-        headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-            'Content-Type': 'application/json',
-        },
-    })
-    .then(response => {
-        console.log("Sections saved successfully:", response.data);
-    })
-    .catch(error => {
-        console.error("Error saving sections:", error.response?.data || error.message);
-    });
 }
 
 // Initial rendering of the table
@@ -171,6 +147,23 @@ function saveCourses() {
         return;
     }
 
+    // Check for duplicates before saving
+    const duplicates = [];
+    const seen = new Set();
+    
+    catalogData.forEach(course => {
+        const key = `${course.departmentId}-${course.courseNumber}`;
+        if (seen.has(key)) {
+            duplicates.push(`${course.departmentId} ${course.courseNumber}`);
+        }
+        seen.add(key);
+    });
+
+    if (duplicates.length > 0) {
+        alert(`The following courses are duplicates and cannot be saved:\n${duplicates.join('\n')}`);
+        return;
+    }
+
     axios.post("https://innovaid.dev/api/catalog/courses", catalogData, {
         headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -178,14 +171,13 @@ function saveCourses() {
         },
     })
     .then(response => {
-        console.log("Catalog Courses saved successfully:", response.data);
         alert("Courses saved successfully!");
     })
     .catch(error => {
-        console.error("Error saving catalog courses:", error.response?.data || error.message);
-        alert("An error occurred while saving the catalog courses.");
+        alert("Error saving courses: " + (error.response?.data?.error || error.message));
     });
 }
+
 function getCatalog() {
     axios.get("https://innovaid.dev/api/catalog/courses", {
         headers: {
@@ -193,26 +185,21 @@ function getCatalog() {
         },
     })
     .then(response => {
-       
-        console.log("Raw API response:", response.data); // Inspect the raw API data
+        console.log("Raw API response:", response.data); // Added debug logging
 
-        // Update the local courses array with the fetched data
+        // Update mapping to match root version's flexible approach
         courses = response.data.map(course => ({
-            departmentId: course.departmentId || course.department_id || "", 
-            courseNumber: course.courseNumber || course.course_number || "", 
-            courseTitle: course.courseTitle || course.course_title || "",    
+            departmentId: course.departmentId || course.department_id || "",
+            courseNumber: course.courseNumber || course.course_number || "",
+            courseTitle: course.courseTitle || course.course_title || ""
         }));
 
-        // Debug the processed courses array
-        console.log("Processed courses:", courses); // Check the mapped array
-
-        // Re-render the table with the updated courses
+        console.log("Processed courses:", courses); // Added debug logging
+        
         renderCourses();
-        console.log("Catalog fetched successfully:", response.data);
         alert("Catalog fetched and updated successfully!");
     })
     .catch(error => {
-        console.error("Error fetching catalog:", error.response?.data || error.message);
-        alert("An error occurred while fetching the catalog.");
+        alert("An error occurred while fetching the catalog."); // Updated error message
     });
 }

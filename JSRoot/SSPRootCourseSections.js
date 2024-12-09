@@ -1,3 +1,11 @@
+function isDuplicateSection(newSection, existingSections) {
+    return existingSections.some(section => 
+        section.departmentId === newSection.departmentId &&
+        section.courseNumber === newSection.courseNumber &&
+        section.sectionId === newSection.sectionId
+    );
+}
+
 // Array to hold the section data locally
 let sections = [];
 
@@ -98,7 +106,7 @@ function validateTime(index, field, value) {
 
 // Function to add a new section row
 function addNewSection() {
-    sections.push({
+    const newSection = {
         departmentId: "",
         courseNumber: "",
         courseTitle: "",
@@ -107,7 +115,10 @@ function addNewSection() {
         days: "",
         startTime: "",
         endTime: "",
-    });
+    };
+    
+    
+    sections.push(newSection);
     renderSections();
 }
 
@@ -169,10 +180,10 @@ function handleCSVUpload(event) {
 function saveSections() {
     const tableBody = document.getElementById("schedule-table-body");
     const rows = tableBody.querySelectorAll("tr");
-
     const updatedSections = [];
+    const duplicates = [];
 
-    rows.forEach(row => {
+    rows.forEach((row, index) => {
         const inputs = row.querySelectorAll("input[type='text']");
         const checkboxes = row.querySelectorAll("input[type='checkbox']");
 
@@ -193,8 +204,29 @@ function saveSections() {
             endTime: inputs[6].value,
         };
 
-        updatedSections.push(section);
+        // Check if this section is a duplicate of any previously processed section
+        const isDuplicate = updatedSections.some(existingSection => 
+            existingSection.departmentId === section.departmentId &&
+            existingSection.courseNumber === section.courseNumber &&
+            existingSection.sectionId === section.sectionId
+        );
+
+        if (isDuplicate) {
+            duplicates.push(`${section.departmentId} ${section.courseNumber} Section ${section.sectionId}`);
+        } else {
+            updatedSections.push(section);
+        }
     });
+
+    if (duplicates.length > 0) {
+        alert(`The following sections are duplicates and will be skipped:\n${duplicates.join('\n')}`);
+        return;
+    }
+
+    if (updatedSections.length === 0) {
+        alert("No valid sections to save.");
+        return;
+    }
 
     axios.post('https://innovaid.dev/api/catalog/courses/sections', updatedSections, {
         headers: {
