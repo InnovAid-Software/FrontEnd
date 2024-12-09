@@ -193,16 +193,21 @@ function getCatalog() {
         },
     })
     .then(response => {
+       
+        console.log("Raw API response:", response.data); // Inspect the raw API data
+
         // Update the local courses array with the fetched data
         courses = response.data.map(course => ({
-            departmentId: course.departmentId,
-            courseNumber: course.courseNumber,
-            courseTitle: course.courseTitle,
+            departmentId: course.departmentId || course.department_id || "", 
+            courseNumber: course.courseNumber || course.course_number || "", 
+            courseTitle: course.courseTitle || course.course_title || "",    
         }));
+
+        // Debug the processed courses array
+        console.log("Processed courses:", courses); // Check the mapped array
 
         // Re-render the table with the updated courses
         renderCourses();
-
         console.log("Catalog fetched successfully:", response.data);
         alert("Catalog fetched and updated successfully!");
     })
