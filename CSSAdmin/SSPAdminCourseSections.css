@@ -1,0 +1,66 @@
+h2 {
+    font-weight: bold;
+    color: #294868;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Table Styles */
+ .table {
+    background-color: #ffd699;
+    border: 1px solid #294868;
+}
+
+    .table th {
+        background-color: #294868;
+        color: white;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .table td {
+        vertical-align: middle;
+        text-align: center;
+    }
+
+/* Button Styles */
+ .btn-primary,
+ .btn-secondary,
+ .btn-success {
+    font-weight: bold;
+}
+
+ .btn-add {
+    background-color: #294868;
+    color: white;
+}
+
+     .btn-add:hover {
+        background-color: #19324d;
+    }
+
+ .btn-secondary {
+    background-color: #5bc0de;
+    color: white;
+}
+
+    .btn-secondary:hover {
+        background-color: #31b0d5;
+    }
+
+ .btn-success {
+    background-color: #5cb85c;
+    color: white;
+}
+
+
+    .btn-success:hover {
+        background-color: #4cae4c;
+    }
+/* Make the Instructor column auto-expand based on content */
+.table th:nth-child(5),
+.table td:nth-child(5) {
+  width: auto;
+  max-width: 250px; /* Optional: Set a max-width to prevent it from getting too wide */
+  word-wrap: break-word; /* Allow wrapping when necessary */
+}
