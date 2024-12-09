@@ -1,7 +1,22 @@
-const signupButton = document.querySelector('.signup');
-const loginButton = document.querySelector('.login');
-const slider = document.querySelector('.slider');
-const formSection = document.querySelector('.form-section');
+const signupBtn = document.getElementById('signupBtn');
+const loginBtn = document.getElementById('loginBtn');
+const loginForm = document.getElementById('loginForm');
+const signupForm = document.getElementById('signupForm');
+
+// Toggle active class and form display
+loginBtn.addEventListener('click', () => {
+    loginBtn.classList.add('active');
+    signupBtn.classList.remove('active');
+    loginForm.classList.add('active');
+    signupForm.classList.remove('active');
+});
+
+signupBtn.addEventListener('click', () => {
+    signupBtn.classList.add('active');
+    loginBtn.classList.remove('active');
+    signupForm.classList.add('active');
+    loginForm.classList.remove('active');
+});
 
 // Function to update slider position
 function updateSliderPosition(targetButton) {
@@ -12,21 +27,21 @@ function updateSliderPosition(targetButton) {
 }
 
 // Event listener for Signup button
-signupButton.addEventListener('click', () => {
-    updateSliderPosition(signupButton);
+signupBtn.addEventListener('click', () => {
+    updateSliderPosition(signupBtn);
     formSection.classList.add("form-section-move");
 });
 // Event listener for Login button
-loginButton.addEventListener('click', () => {
-    updateSliderPosition(loginButton);
+loginBtn.addEventListener('click', () => {
+    updateSliderPosition(loginBtn);
     formSection.classList.remove("form-section-move");
 });
 // Initial setup - set the slider position to the login button by default
-window.addEventListener('load', () => updateSliderPosition(loginButton));
+window.addEventListener('load', () => updateSliderPosition(loginBtn));
 
 // Update the slider position when resizing the window for responsiveness
 window.addEventListener('resize', () => {
-    const activeButton = formSection.classList.contains("form-section-move") ? signupButton : loginButton;
+    const activeButton = formSection.classList.contains("form-section-move") ? signupBtn : loginBtn;
     updateSliderPosition(activeButton);
 });
 

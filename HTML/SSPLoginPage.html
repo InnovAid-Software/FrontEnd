@@ -1,77 +1,89 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Login page</title>
+    <title>Woo Class Scheduler - Login</title>
     <meta charset="UTF-8">
-    <meta name="description" content="Keyword rich narrative on site purpose">
-    <meta name="InovAid" content="Student Scheduling Web Application">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--added for responsiveness-->
+    <meta name="description" content="Student class scheduling application">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&display=swap" rel="stylesheet">
+    
     <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!--Custom CSS-->
-    <link href="../CSS/SSPLoginCSS.css" rel="stylesheet" />
-    <!-- Axios for API requests -->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../CSS/SSPLoginCSS.css" rel="stylesheet">
 </head>
 <body>
-    <main>
-        <header role="banner" class="primary">
-            <div class="hgroup">
-                <h1><a href="../HTML/SSPLoginPage.html">Woo Class Scheduler </a></h1>
-                <h2>Innovaid</h2>
+    <header class="primary">
+        <div class="header-content">
+            <img src="../Assests/logo.png" alt="InnovAid Logo">
+            <h1>InnovAid</h1>
+        </div>
+    </header>
+    <div class="login-container">
+        <div class="card">
+            <div class="card-header">
+                <div class="toggle-buttons">
+                    <button class="toggle-btn active" id="loginBtn">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </button>
+                    <button class="toggle-btn" id="signupBtn">
+                        <i class="fas fa-user-plus"></i> Signup
+                    </button>
+                </div>
             </div>
-        </header>
-
-        <div class="container">
-            <div class="slider"></div>
-            <div class="btn">
-                <button class="login">Login</button>
-                <button class="signup">Signup</button>
-            </div>
-
-            <div class="form-section">
-
-                <form class="login-box text-center" id="loginForm">
-                    <input type="email" id="loginEmail" class="ele" placeholder="youremail@email.com" required>
-                    <input type="password" id="LoginPassword" class="ele" placeholder="password" required>
-                    <button class="clkbtn" type="submit">Login</button>
+            <div class="card-body">
+                <div id="message" class="alert d-none"></div>
+                <!-- Login Form -->
+                <form id="loginForm" class="form active">
+                    <div class="form-group">
+                        <input type="email" id="loginEmail" placeholder="Email address" required>
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="LoginPassword" placeholder="Password" required>
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </button>
                 </form>
 
-                <form class="signup-box text-center" id="signupForm">
-
-                    <input type="email" id="signUpEmail" class="ele" placeholder="youremail@email.com" required>
-                    <input type="password" id="signUpPassword" class="ele" placeholder="password" required>
-                    <label for="signup-user-types">Choose User-Type:</label>
-                    <select name="user-types" id="signup-user-types" class="ele" required>
-                        <option value="Student">Student</option>
-                        <option value="Admin">Admin</option>
-                        <option value="Root">Root</option>
-                    </select>
-                    <button class="clkbtn" type="submit">Signup</button>
+                <!-- Signup Form -->
+                <form id="signupForm" class="form">
+                    <div class="form-group">
+                        <input type="email" id="signUpEmail" placeholder="Email address" required>
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="signUpPassword" placeholder="Password" required>
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <div class="form-group">
+                        <select id="signup-user-types" required>
+                            <option value="">Select User Type</option>
+                            <option value="Student">Student</option>
+                            <option value="Admin">Admin</option>
+                            <option value="Root">Root</option>
+                        </select>
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-user-plus"></i> Sign Up
+                    </button>
                 </form>
             </div>
         </div>
+    </div>
 
-        <!-- Message Display -->
-        <div id="message"></div>
-    </main>
-
-
-    <footer id="colophon" role="contentinfo">
-        <h6>&copy; 2024 Innovaid | <a href="mailto:ysandovalja@ualr.edu"> Report a problem</a></h6>
-
-    </footer>
-    <script src="../JS/SSPLoginJS.js"></script> <!-- Ensure this path matches your project structure -->
-    
-    <!-- Bootstrap 4.5.2 JS (include before the closing body tag) -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
-
-
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../JS/SSPLoginJS.js"></script>
 </body>
 </html>
 
