@@ -211,27 +211,24 @@ function saveSections() {
     });
 }
 function getSections() {
-    axios.get("https://innovaid.dev/api/catalog/courses/sections", {
+    axios.get("https://innovaid.dev/api/catalog/courses/sections/all", {
         headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
+        }
     })
     .then(response => {
         // Update the local sections array with the fetched data
         sections = response.data.map(section => ({
-            departmentId: section.departmentId,
-            courseNumber: section.courseNumber,
-            courseTitle: section.courseTitle,
-            sectionId: section.sectionId,
+            departmentId: section.department_id,
+            courseNumber: section.course_number,
+            sectionId: section.section_id,
             instructor: section.instructor,
             days: section.days || "", // Handle days being null or missing
-            startTime: section.startTime,
-            endTime: section.endTime,
+            startTime: section.start_time,
+            endTime: section.end_time
         }));
 
-        // Re-render the table with the updated sections
         renderSections();
-
         console.log("Sections fetched successfully:", response.data);
         alert("Sections fetched and updated successfully!");
     })
