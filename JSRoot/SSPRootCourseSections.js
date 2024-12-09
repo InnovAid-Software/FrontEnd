@@ -221,6 +221,7 @@ function getSections() {
         sections = response.data.map(section => ({
             departmentId: section.department_id,
             courseNumber: section.course_number,
+            courseTitle: section.course_title,
             sectionId: section.section_id,
             instructor: section.instructor,
             days: section.days || "", // Handle days being null or missing
