@@ -164,14 +164,12 @@ function saveCourses() {
             'Content-Type': 'application/json',
         },
     })
-        .then(response => {
-            console.log("Catalog Courses saved successfully:", response.data);
-            alert("Courses saved successfully!");
-        })
-        .catch(error => {
-            console.error("Error saving catalog courses:", error.response?.data || error.message);
-            alert("An error occurred while saving the catalog courses.");
-        });
+    .then(response => {
+        console.log("Courses saved successfully:", response.data);
+    })
+    .catch(error => {
+        console.error("Error saving courses:", error.response?.data || error.message);
+    });
 }
 
 function getCatalog() {
@@ -180,19 +178,56 @@ function getCatalog() {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
     })
-        .then(response => {
-            // Update mapping to match backend response format
-            courses = response.data.map(course => ({
-                departmentId: course.department_id,
-                courseNumber: course.course_number,
-                courseTitle: course.course_title
-            }));
-            renderCourses();
-            console.log("Catalog fetched successfully");
-            alert("Catalog fetched and updated successfully!");
-        })
-        .catch(error => {
-            console.error("Error fetching catalog:", error.response?.data || error.message);
-            alert("Error fetching catalog: " + (error.response?.data?.error || error.message));
-        });
+    .then(response => {
+        console.log("Raw API response:", response.data); // Added debug logging
+
+        // Update mapping to match root version's flexible approach
+        courses = response.data.map(course => ({
+            departmentId: course.departmentId || course.department_id || "",
+            courseNumber: course.courseNumber || course.course_number || "",
+            courseTitle: course.courseTitle || course.course_title || ""
+        }));
+
+        console.log("Processed courses:", courses); // Added debug logging
+        
+        renderCourses();
+        console.log("Catalog fetched successfully:", response.data);
+        alert("Catalog fetched and updated successfully!");
+    })
+    .catch(error => {
+        console.error("Error fetching catalog:", error.response?.data || error.message);
+        alert("An error occurred while fetching the catalog."); // Updated error message
+    });
+}
+
+function getSections() {
+    axios.get("https://innovaid.dev/api/catalog/courses/sections", {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            'Content-Type': 'application/json'
+        },
+    })
+    .then(response => {
+        // Update the local sections array with the fetched data
+        sections = response.data.map(section => ({
+            departmentId: section.departmentId || section.department_id,
+            courseNumber: section.courseNumber || section.course_number,
+            courseTitle: section.courseTitle || section.course_title,
+            sectionId: section.sectionId || section.section_id,
+            instructor: section.instructor,
+            days: section.days || "", // Handle days being null or missing
+            startTime: section.startTime || section.start_time,
+            endTime: section.endTime || section.end_time
+        }));
+
+        // Re-render the table with the updated sections
+        renderSections();
+
+        console.log("Sections fetched successfully:", response.data);
+        alert("Sections fetched and updated successfully!");
+    })
+    .catch(error => {
+        console.error("Error fetching sections:", error.response?.data || error.message);
+        alert("An error occurred while fetching the sections.");
+    });
 }
