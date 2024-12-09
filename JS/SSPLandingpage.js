@@ -417,7 +417,7 @@ document.addEventListener('DOMContentLoaded', () => {
         adminContent.style.display = 'block';
         navLinks.innerHTML = `  
         <li class="nav-item">
-        <a class="nav-link" href="../HTML/SSPLandingpage.html">
+        <a class="nav-link" href="../HTMLAdmin/SSPAdminCourseSectionsPage.html">
             <i class='bx bx-home'></i>
             Course Sections
         </a>
